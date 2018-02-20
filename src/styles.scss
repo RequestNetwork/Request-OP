@@ -1,1 +1,52 @@
-/* You can add global styles to this file, and also import other style files */
+@import 'variables';
+@import 'mixins';
+
+@import '~font-awesome/scss/font-awesome';
+@import url('//fonts.googleapis.com/icon?family=Material+Icons');
+
+html,
+body {
+  @include serif-font();
+  min-width: 320px;
+  height: 100%;
+  font-weight: 300;
+}
+
+body {
+  margin: 0;
+}
+
+* {
+  &:active,
+   :focus {
+    outline: none !important;
+  }
+}
+
+a {
+  cursor: pointer;
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+// fix chrome autofill theme
+input {
+  &:-webkit-autofill {
+    -webkit-text-fill-color: $blue-grey !important;
+    -webkit-box-shadow: 0 0 0px 1000px transparent inset;
+    transition: background-color 5000s ease-in-out 0s;
+  }
+}
+
+// remove number input spinners
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+// supports Mozilla
+input[type=number] {
+  -moz-appearance: textfield;
+}

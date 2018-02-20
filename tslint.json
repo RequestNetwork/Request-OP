@@ -2,7 +2,8 @@
   "rulesDirectory": [
     "node_modules/codelyzer"
   ],
-  "rules": {
+  "rules":
+  {
     "arrow-return-shorthand": true,
     "callable-types": true,
     "class-name": true,
@@ -11,7 +12,8 @@
       "check-space"
     ],
     "curly": true,
-    "deprecation": {
+    "deprecation":
+    {
       "severity": "warn"
     },
     "eofline": true,
@@ -29,8 +31,7 @@
     "interface-over-type-literal": true,
     "label-position": true,
     "max-line-length": [
-      true,
-      140
+      false,
     ],
     "member-access": false,
     "member-ordering": [

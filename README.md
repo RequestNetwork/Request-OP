@@ -1,4 +1,7 @@
-# RequestOP
+<img src="https://request.network/assets/img/request-logo.png" width="50px" >
+
+---
+# Request-OP
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.6.6.
 
