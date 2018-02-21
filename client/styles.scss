@@ -4,16 +4,23 @@
 @import '~font-awesome/scss/font-awesome';
 @import url('//fonts.googleapis.com/icon?family=Material+Icons');
 
+@import '~bootstrap/scss/bootstrap-reboot';
+@import '~bootstrap/scss/bootstrap-grid';
+@import '~bootstrap/scss/utilities';
+
 html,
 body {
   @include serif-font();
   min-width: 320px;
   height: 100%;
-  font-weight: 300;
+  margin: 0;
 }
 
-body {
-  margin: 0;
+
+.wrapper {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 * {
