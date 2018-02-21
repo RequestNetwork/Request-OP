@@ -1,7 +1,46 @@
-<section class="wrapper hero-crypto">
-  <div class="container">
-    <p>
-      cryptoshop works!
-    </p>
+<section class="wrapper cryptoshop justify-content-center">
+  <div class="container my-5">
+    <div class="cryptoshop-title">
+      <img class="mr-3" src="assets/coins-logo.png"> Crypto shop
+    </div>
+    <div class="order-card">
+      <p>Check-out</p>
+      <table class="crypto-table">
+        <tr class="title-row">
+          <th>Item (description)</th>
+          <th class="text-right">Price (unit)</th>
+          <th class="text-right">Quantity</th>
+          <th class="text-right">Price (total)</th>
+        </tr>
+        <tr *ngFor="let item of items" class="item-row my-3">
+          <td>{{ item.desc }}</td>
+          <td class="text-right">{{ item.priceUnit }} ETH</td>
+          <td class="text-right">{{ item.quantity }}</td>
+          <td class="text-right">{{ item.priceTotal }} ETH</td>
+        </tr>
+        <tr>
+          <td colspan="4">
+            <mat-divider class="my-3"></mat-divider>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="3" class="text-right">Total</td>
+          <td colspan="1" class="text-right">0.652 ETH</td>
+        </tr>
+      </table>
+    </div>
+    <div class="pull-right">
+      <button mat-raised-button color="primary" class="pay-button">
+        <div class="d-flex align-items-center" style="height: 60px;">
+          <img src="assets/request-logo.png" [style.height]="'30px'">
+          <div class="h-100 px-3">
+            <div style="border: none; border-left:1px solid #334F6D;height:100%"></div>
+          </div>
+          <span>Pay with&nbsp;</span>
+          <img [style.height]="'20px'" src="assets/eth-logo-white.png">
+          <span>&nbsp;ETH</span>
+        </div>
+      </button>
+    </div>
   </div>
 </section>

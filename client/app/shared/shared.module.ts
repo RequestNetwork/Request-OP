@@ -9,6 +9,7 @@ import { MatCardModule } from '@angular/material/card';
 // import { MatCheckboxModule } from '@angular/material/checkbox';
 // import { MatChipsModule } from '@angular/material/chips';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatInputModule } from '@angular/material/input';
@@ -39,6 +40,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     // MatCheckboxModule,
     // MatChipsModule,
     MatDialogModule,
+    MatDividerModule,
     MatIconModule,
     MatMenuModule,
     MatInputModule,
@@ -68,6 +70,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     // MatCheckboxModule,
     // MatChipsModule,
     MatDialogModule,
+    MatDividerModule,
     MatIconModule,
     MatMenuModule,
     MatInputModule,
