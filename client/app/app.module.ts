@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { SharedModule } from './shared/shared.module';
 
+import { RequestService } from './services/request.service';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CryptoshopComponent } from './cryptoshop/cryptoshop.component';
@@ -15,7 +17,9 @@ import { CryptoshopComponent } from './cryptoshop/cryptoshop.component';
     SharedModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [
+    RequestService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

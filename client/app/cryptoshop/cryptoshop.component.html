@@ -1,5 +1,5 @@
 <section class="wrapper cryptoshop justify-content-center">
-  <div class="container my-5">
+  <div class="container mt-3 mb-5 pb-5">
     <div class="cryptoshop-title">
       <img class="mr-3" src="assets/coins-logo.png"> Crypto shop
     </div>
@@ -7,10 +7,10 @@
       <p>Check-out</p>
       <table class="crypto-table">
         <tr class="title-row">
-          <th>Item (description)</th>
-          <th class="text-right">Price (unit)</th>
-          <th class="text-right">Quantity</th>
-          <th class="text-right">Price (total)</th>
+          <td>Item (description)</td>
+          <td class="text-right">Price (unit)</td>
+          <td class="text-right">Quantity</td>
+          <td class="text-right">Price (total)</td>
         </tr>
         <tr *ngFor="let item of items" class="item-row my-3">
           <td>{{ item.desc }}</td>
@@ -30,7 +30,7 @@
       </table>
     </div>
     <div class="pull-right">
-      <button mat-raised-button color="primary" class="pay-button">
+      <button mat-raised-button color="primary" class="pay-button" (click)="payWithEth()">
         <div class="d-flex align-items-center" style="height: 60px;">
           <img src="assets/request-logo.png" [style.height]="'30px'">
           <div class="h-100 px-3">

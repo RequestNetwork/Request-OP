@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { RequestService } from '../services/request.service';
+
 
 @Component({
   selector: 'app-cryptoshop',
@@ -13,8 +15,21 @@ export class CryptoshopComponent implements OnInit {
     { desc: 'Mastering Req book', priceUnit: 0.1, quantity: 1, priceTotal: 0.1 }
   ];
 
-  constructor() {}
+  constructor(private requestService: RequestService) {}
 
   ngOnInit() {}
 
+  payWithEth() {
+    console.log('I want to pay with ETH');
+    this.requestService.signRequest(this.items).subscribe(
+      res => {
+        // this.router.navigate(['']);
+      },
+      error => {
+        // do something
+      }
+    );
+  }
+
 }
+
