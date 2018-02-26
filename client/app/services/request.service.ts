@@ -13,11 +13,11 @@ export class RequestService {
   constructor(private http: Http) {}
 
   signRequest(request): Observable < any > {
-    return this.http.post('/api/request', JSON.stringify(request), this.options);
+    return this.http.post('/api/signRequest', JSON.stringify(request), this.options);
   }
 
-  getRequest(requestId): Observable < any > {
-    return this.http.get(`/api/request/${requestId}`, this.options).map(res => res.json());
-  }
+  // getRequest(requestId): Observable < any > {
+  //   return this.http.get(`/api/request/${requestId}`, this.options).map(res => res.json());
+  // }
 
 }

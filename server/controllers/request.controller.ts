@@ -1,18 +1,39 @@
 import RequestNetwork from '@requestnetwork/request-network.js';
-import Web3 from 'web3';
+
+import * as HDWalletProvider from 'truffle-hdwallet-provider';
+import * as ProviderEngine from 'web3-provider-engine';
+import * as ethereumjsWallet from 'ethereumjs-wallet';
+import * as WalletSubprovider from 'web3-provider-engine/subproviders/wallet';
+
+const Web3 = require('web3');
 
 export default class RequestCtrl {
 
-  private web3: Web3;
+  private web3;
+  private infuraNodeUrl = 'https://rinkeby.infura.io/BQBjfSi5EKSCQQpXebO';
   private rn;
 
   constructor() {
-    this.rn = new RequestNetwork(null, 4);
-    this.web3 = this.rn.requestEthereumService.web3Single.web3;
+    const mnemonic = 'butter route frozen life lizard laundry kiwi able second meadow company confirm';
+    const provider = new HDWalletProvider(mnemonic, this.infuraNodeUrl);
+    this.web3 = new Web3(provider.engine);
+    this.rn = new RequestNetwork(provider, 4);
+
+    this.web3.eth.getAccounts(console.log);
   }
 
-  signRequestAsPayee(req, res) {
-    // this.rn.signRequestAsPayee
+  signRequest(req, res) {
+    const request = req.body;
+    console.log('hey');
+    console.log(req.body);
+    // this.rn.signRequestAsPayee(req.amountInitial);
+// @param _amountInitial amount initial expected of the request
+// @param _expirationDate timestamp of the date after what the signed request is useless
+// @param _data Json of the request's details (optional)
+// @param _extension address of the extension contract of the request (optional) NOT USED YET
+// @param _extensionParams array of parameters for the extension (optional) NOT USED YET
+// @param _from address of the payee, default account will be used otherwise (optional)
+// @return promise of the object containing the request signed
   }
 
   // abstract model: any;
