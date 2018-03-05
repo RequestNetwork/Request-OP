@@ -11,29 +11,40 @@ export default class RequestCtrl {
 
   private web3;
   private infuraNodeUrl = 'https://rinkeby.infura.io/BQBjfSi5EKSCQQpXebO';
-  private rn;
+  rn;
+
+  items = [
+    { desc: 'Laszlo Pizza ', priceUnit: 0.1, quantity: 3, priceTotal: 0.3 },
+    { desc: 'REQ & Morty Figurine', priceUnit: 0.25, quantity: 1, priceTotal: 0.25 },
+    { desc: 'Get Req or die tryin’ Blu-ray', priceUnit: 0.002, quantity: 1, priceTotal: 0.002 },
+    { desc: 'Mastering Req book', priceUnit: 0.1, quantity: 1, priceTotal: 0.1 }
+  ];
 
   constructor() {
     const mnemonic = 'butter route frozen life lizard laundry kiwi able second meadow company confirm';
     const provider = new HDWalletProvider(mnemonic, this.infuraNodeUrl);
     this.web3 = new Web3(provider.engine);
-    this.rn = new RequestNetwork(provider, 4);
-
-    this.web3.eth.getAccounts(console.log);
+    try {
+      this.rn = new RequestNetwork(provider, 4);
+    } catch (err) {
+      console.error(err);
+    }
   }
 
-  signRequest(req, res) {
-    const request = req.body;
-    console.log('hey');
-    console.log(req.body);
-    // this.rn.signRequestAsPayee(req.amountInitial);
-// @param _amountInitial amount initial expected of the request
-// @param _expirationDate timestamp of the date after what the signed request is useless
-// @param _data Json of the request's details (optional)
-// @param _extension address of the extension contract of the request (optional) NOT USED YET
-// @param _extensionParams array of parameters for the extension (optional) NOT USED YET
-// @param _from address of the payee, default account will be used otherwise (optional)
-// @return promise of the object containing the request signed
+  signRequest = async(req, res) => {
+    if (req.body && req.body.orderId) {
+       if (req.body.orderId === '030890') {
+        const result = await this.rn.requestEthereumService.signRequestAsPayee(this.web3.utils.toWei('0.652', 'ether'), new Date().getTime() + 1000 * 60 * 60 * 24, JSON.stringify({data: this.items}));
+        res.status(200).json(result);
+      }
+    }
+    // @param _amountInitial amount initial expected of the request
+    // @param _expirationDate timestamp of the date after what the signed request is useless
+    // @param _data Json of the request's details (optional)
+    // @param _extension address of the extension contract of the request (optional) NOT USED YET
+    // @param _extensionParams array of parameters for the extension (optional) NOT USED YET
+    // @param _from address of the payee, default account will be used otherwise (optional)
+    // @return promise of the object containing the request signed
   }
 
   // abstract model: any;
