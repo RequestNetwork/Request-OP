@@ -13,7 +13,10 @@ export class RequestService {
   constructor(private http: Http) {}
 
   signRequest(request): Observable < any > {
-    return this.http.post('/api/signRequest', JSON.stringify(request), this.options);
+    return this.http.post('/api/signRequest', JSON.stringify(request), this.options).map(
+      res => {
+        return res.json();
+      });
   }
 
   // getRequest(requestId): Observable < any > {
