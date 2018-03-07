@@ -12,6 +12,7 @@ export default class RequestCtrl {
   private web3;
   private infuraNodeUrl = 'https://rinkeby.infura.io/BQBjfSi5EKSCQQpXebO';
   rn;
+  private payeeIdAddress = 0x8F0255e24B99825e9AD4bb7506678F18C630453F;
 
   items = [
     { desc: 'Laszlo Pizza ', priceUnit: 0.1, quantity: 3, priceTotal: 0.3 },
@@ -33,8 +34,14 @@ export default class RequestCtrl {
 
   signRequest = async(req, res) => {
     if (req.body && req.body.orderId) {
-       if (req.body.orderId === '030890') {
-        const result = await this.rn.requestEthereumService.signRequestAsPayee(this.web3.utils.toWei('0.652', 'ether'), new Date().getTime() + 1000 * 60 * 60 * 24, JSON.stringify({data: this.items}));
+      if (req.body.orderId === '030890') {
+        const result = await this.rn.requestEthereumService.signRequestAsPayee(
+          [this.payeeIdAddress], // _payeesIdAddress[]
+          [this.web3.utils.toWei('0.652', 'ether')], // _expectedAmounts[]
+          new Date().getTime() + 1000 * 60 * 60 * 24, //_expirationDate (1day)
+          null, //_payeesPaymentAddress[]
+          JSON.stringify({ data: this.items }), //_data
+        );
         res.status(200).json(result);
       }
     }
