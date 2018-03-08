@@ -5,7 +5,7 @@ export default function setRoutes(app) {
 
   const router = express.Router();
   const requestCtrl = new RequestCtrl();
-
+  
   router.route('/signRequest').post(requestCtrl.signRequest);
   // router.route('/user').post(userCtrl.insert);
 

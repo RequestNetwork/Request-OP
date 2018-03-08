@@ -16,6 +16,9 @@ export class RequestService {
     return this.http.post('/api/signRequest', JSON.stringify(request), this.options).map(
       res => {
         return res.json();
+      },
+      err => {
+        console.error(err);
       });
   }
 

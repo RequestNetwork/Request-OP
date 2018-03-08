@@ -1,7 +1,7 @@
-<section class="wrapper cryptoshop justify-content-center">
+<section class="wrapper shop justify-content-center">
   <div class="container mt-3 mb-5 pb-5">
-    <div class="cryptoshop-title">
-      <img class="mr-3" src="assets/coins-logo.png"> Crypto shop
+    <div class="shop-title">
+      <img class="mr-3" [style.maxWidth]="'50px'" src="assets/nyan.png"> Just another shop
     </div>
     <div class="order-card">
       <p class="d-flex justify-content-between">
@@ -19,7 +19,7 @@
           <td>{{ item.desc }}</td>
           <td class="text-right">{{ item.priceUnit }} ETH</td>
           <td class="text-right">{{ item.quantity }}</td>
-          <td class="text-right">{{ item.priceTotal }} ETH</td>
+          <td class="text-right">{{ item.priceUnit * item.quantity }} ETH</td>
         </tr>
         <tr>
           <td colspan="4">
@@ -28,7 +28,7 @@
         </tr>
         <tr>
           <td colspan="3" class="text-right">Total</td>
-          <td colspan="1" class="text-right">0.652 ETH</td>
+          <td colspan="1" class="text-right">{{ getTotal() }} ETH</td>
         </tr>
       </table>
     </div>

@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { CryptoshopComponent } from './cryptoshop/cryptoshop.component';
+import { ShopComponent } from './shop/shop.component';
 
 
 const routes: Routes = [
-  // { pathMatch: 'full', path: '', component: CryptoshopComponent },
-  { pathMatch: 'full', path: 'cryptoshop', component: CryptoshopComponent },
-  { pathMatch: 'full', path: '**', redirectTo: '/cryptoshop' },
+  // { pathMatch: 'full', path: '', component: ShopComponent },
+  { pathMatch: 'full', path: 'shop', component: ShopComponent },
+  { pathMatch: 'full', path: '**', redirectTo: '/shop' },
 ];
 
 @NgModule({

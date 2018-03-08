@@ -1,28 +1,32 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { RequestService } from '../services/request.service';
 
 import { DOCUMENT } from '@angular/platform-browser';
 
 @Component({
-  selector: 'app-cryptoshop',
-  templateUrl: './cryptoshop.component.html',
-  styleUrls: ['./cryptoshop.component.scss']
+  selector: 'app-shop',
+  templateUrl: './shop.component.html',
+  styleUrls: ['./shop.component.scss']
 })
-export class CryptoshopComponent implements OnInit {
+export class ShopComponent {
   items = [
-    { desc: 'Laszlo Pizza ', priceUnit: 0.1, quantity: 3, priceTotal: 0.3 },
-    { desc: 'REQ & Morty Figurine', priceUnit: 0.25, quantity: 1, priceTotal: 0.25 },
-    { desc: 'Get Req or die tryin’ Blu-ray', priceUnit: 0.002, quantity: 1, priceTotal: 0.002 },
-    { desc: 'Mastering Req book', priceUnit: 0.1, quantity: 1, priceTotal: 0.1 }
+    { desc: 'Ledger Nano S', priceUnit: 0.083, quantity: 1 },
+    { desc: 'Trezor', priceUnit: 0.086, quantity: 0 },
+    { desc: 'Cryptosteel Mnemonic', priceUnit: 0.092, quantity: 1 },
   ];
   orderId = '030890';
   gatewayUrl = 'http://localhost:8080/#/pay-with-request';
 
   constructor(@Inject(DOCUMENT) private document: any, private requestService: RequestService) {
-
   }
 
-  ngOnInit() {}
+  getTotal() {
+    let total = 0;
+    for (let item of this.items) {
+      total += item.priceUnit * item.quantity;
+    }
+    return total;
+  }
 
   payWithEth() {
     console.log('click on pay with ETH');

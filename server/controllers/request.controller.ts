@@ -10,15 +10,14 @@ const Web3 = require('web3');
 export default class RequestCtrl {
 
   private web3;
+  private rn;
   private infuraNodeUrl = 'https://rinkeby.infura.io/BQBjfSi5EKSCQQpXebO';
-  rn;
-  private payeeIdAddress = 0x8F0255e24B99825e9AD4bb7506678F18C630453F;
+  private payeeIdAddress = '0x8F0255e24B99825e9AD4bb7506678F18C630453F';
 
   items = [
-    { desc: 'Laszlo Pizza ', priceUnit: 0.1, quantity: 3, priceTotal: 0.3 },
-    { desc: 'REQ & Morty Figurine', priceUnit: 0.25, quantity: 1, priceTotal: 0.25 },
-    { desc: 'Get Req or die tryin’ Blu-ray', priceUnit: 0.002, quantity: 1, priceTotal: 0.002 },
-    { desc: 'Mastering Req book', priceUnit: 0.1, quantity: 1, priceTotal: 0.1 }
+    { desc: 'Ledger Nano S', priceUnit: 0.083, quantity: 1 },
+    { desc: 'Trezor', priceUnit: 0.086, quantity: 0 },
+    { desc: 'Cryptosteel Mnemonic', priceUnit: 0.092, quantity: 1 },
   ];
 
   constructor() {
@@ -35,14 +34,18 @@ export default class RequestCtrl {
   signRequest = async(req, res) => {
     if (req.body && req.body.orderId) {
       if (req.body.orderId === '030890') {
-        const result = await this.rn.requestEthereumService.signRequestAsPayee(
-          [this.payeeIdAddress], // _payeesIdAddress[]
-          [this.web3.utils.toWei('0.652', 'ether')], // _expectedAmounts[]
-          new Date().getTime() + 1000 * 60 * 60 * 24, //_expirationDate (1day)
-          null, //_payeesPaymentAddress[]
-          JSON.stringify({ data: this.items }), //_data
-        );
-        res.status(200).json(result);
+        try {
+          const result = await this.rn.requestEthereumService.signRequestAsPayee(
+            [this.payeeIdAddress], // _payeesIdAddress[]
+            [this.web3.utils.toWei('0.652', 'ether')], // _expectedAmounts[]
+            new Date().getTime() + 1000 * 60 * 60 * 24, //_expirationDate (1day)
+            null, //_payeesPaymentAddress[]
+            JSON.stringify({ data: this.items }), //_data
+          );
+          res.status(200).json(result);
+        } catch (err) {
+          res.status(400).send(err);
+        }
       }
     }
     // @param _amountInitial amount initial expected of the request

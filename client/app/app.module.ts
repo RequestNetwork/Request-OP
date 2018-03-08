@@ -5,13 +5,13 @@ import { RequestService } from './services/request.service';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { CryptoshopComponent } from './cryptoshop/cryptoshop.component';
+import { ShopComponent } from './shop/shop.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    CryptoshopComponent
+    ShopComponent
   ],
   imports: [
     SharedModule,

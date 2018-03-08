@@ -2,7 +2,7 @@
 @import 'variables';
 @import 'mixins';
 
-.cryptoshop {
+.shop {
   @include background-cover();
   background: #F7F8FA;
   font-family: 'Poppins', sans-serif;
@@ -12,7 +12,7 @@
   max-width: map-get($grid-breakpoints, sm);
 }
 
-.cryptoshop-title {
+.shop-title {
   display: flex;
   align-items: center;
   font-size: 18px;
