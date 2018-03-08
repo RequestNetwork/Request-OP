@@ -32,7 +32,6 @@ export class ShopComponent {
     console.log('click on pay with ETH');
     this.requestService.signRequest({orderId: this.orderId}).subscribe(
       res => {
-        console.log(res);
         if (res.signature) {
           res.callbackUrl = this.document.location.href;
           this.document.location.href = `${this.gatewayUrl}?data=${encodeURIComponent(JSON.stringify(res))}`;

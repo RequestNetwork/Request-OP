@@ -18,7 +18,7 @@ export class RequestService {
         return res.json();
       },
       err => {
-        console.error(err);
+        return err;
       });
   }
 

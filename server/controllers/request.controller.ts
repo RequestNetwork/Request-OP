@@ -40,7 +40,7 @@ export default class RequestCtrl {
             [this.web3.utils.toWei('0.652', 'ether')], // _expectedAmounts[]
             new Date().getTime() + 1000 * 60 * 60 * 24, //_expirationDate (1day)
             null, //_payeesPaymentAddress[]
-            JSON.stringify({ data: this.items }), //_data
+            JSON.stringify({ data: { reason: `Order #${req.body.orderId} from Just Another Shop ` } }), //_data
           );
           res.status(200).json(result);
         } catch (err) {
