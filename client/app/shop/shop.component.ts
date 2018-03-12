@@ -16,13 +16,15 @@ export class ShopComponent {
   ];
   orderId = '030890';
   gatewayUrl = 'http://localhost:8080/#/pay-with-request';
+  callbackUrl: string;
 
   constructor(@Inject(DOCUMENT) private document: any, private requestService: RequestService) {
+    this.callbackUrl = `${this.document.location.origin}/#/confirm`;
   }
 
   getTotal() {
     let total = 0;
-    for (let item of this.items) {
+    for (const item of this.items) {
       total += item.priceUnit * item.quantity;
     }
     return total;
@@ -33,8 +35,7 @@ export class ShopComponent {
     this.requestService.signRequest({orderId: this.orderId}).subscribe(
       res => {
         if (res.signature) {
-          res.callbackUrl = this.document.location.href;
-          this.document.location.href = `${this.gatewayUrl}?data=${encodeURIComponent(JSON.stringify(res))}`;
+          this.document.location.href = `${this.gatewayUrl}?data=${encodeURIComponent(JSON.stringify({request: res, callback: this.callbackUrl}))}`;
         }
       },
       error => {

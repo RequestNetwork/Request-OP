@@ -6,12 +6,14 @@ import { RequestService } from './services/request.service';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ShopComponent } from './shop/shop.component';
+import { ConfirmComponent } from './confirm/confirm.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    ShopComponent
+    ShopComponent,
+    ConfirmComponent
   ],
   imports: [
     SharedModule,

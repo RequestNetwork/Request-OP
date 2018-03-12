@@ -2,7 +2,7 @@
 @import 'variables';
 @import 'mixins';
 
-.shop {
+.confirm {
   @include background-cover();
   background: #F7F8FA;
   font-family: 'Poppins', sans-serif;
@@ -12,10 +12,11 @@
   max-width: map-get($grid-breakpoints, sm);
 }
 
-.shop-title {
+.confirm-title {
   display: flex;
   align-items: center;
   font-size: 18px;
+  color: $primary;
 }
 
 .order-card {
@@ -26,24 +27,4 @@
   margin: 2rem 0;
   border: 1px solid rgba(#D8E0EA, 0.2);
   box-shadow: 1px 2px 4px 0px rgba(#D8E0EA, 0.5);
-}
-
-.crypto-table {
-  width: 100%;
-  .title-row {
-    font-size: 14px;
-  }
-  .item-row {
-    font-size: 12px;
-  }
-  tr {
-    height: 32px;
-  }
-}
-
-.pay-button {
-  font-size: 16px;
-  font-weight: normal;
-  color: white;
-  border-bottom: 3px solid #6CFDCC;
 }

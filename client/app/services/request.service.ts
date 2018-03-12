@@ -22,8 +22,14 @@ export class RequestService {
       });
   }
 
-  // getRequest(requestId): Observable < any > {
-  //   return this.http.get(`/api/request/${requestId}`, this.options).map(res => res.json());
-  // }
+  getTxDetails(txHash): Observable < any > {
+    return this.http.get(`/api/getTxDetails/${txHash}`, this.options).map(
+      res => {
+        return res.json();
+      },
+      err => {
+        return err;
+      });
+  }
 
 }

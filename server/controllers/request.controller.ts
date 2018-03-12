@@ -25,7 +25,7 @@ export default class RequestCtrl {
     const provider = new HDWalletProvider(mnemonic, this.infuraNodeUrl);
     this.web3 = new Web3(provider.engine);
     try {
-      this.rn = new RequestNetwork(provider, 4);
+      this.rn = new RequestNetwork(provider, 4); // rinkeby testnet
     } catch (err) {
       console.error(err);
     }
@@ -37,27 +37,35 @@ export default class RequestCtrl {
         try {
           const result = await this.rn.requestEthereumService.signRequestAsPayee(
             [this.payeeIdAddress], // _payeesIdAddress[]
-            [this.web3.utils.toWei('0.652', 'ether')], // _expectedAmounts[]
-            new Date().getTime() + 1000 * 60 * 60 * 24, //_expirationDate (1day)
-            null, //_payeesPaymentAddress[]
-            JSON.stringify({ data: { reason: `Order #${req.body.orderId} from Just Another Shop ` } }), //_data
+            [this.web3.utils.toWei('0.175', 'ether')], // _expectedAmounts[]
+            new Date().getTime() + 1000 * 60 * 60 * 24, // _expirationDate (1day)
+            null, // _payeesPaymentAddress[]
+            JSON.stringify({ reason: `Order #${req.body.orderId} from Just Another Shop ` }), // _data
           );
           res.status(200).json(result);
         } catch (err) {
           res.status(400).send(err);
         }
+      } else {
+        res.status(400).send('orderId not found');
       }
+    } else {
+      res.status(400).send('missing orderId param');
     }
-    // @param _amountInitial amount initial expected of the request
-    // @param _expirationDate timestamp of the date after what the signed request is useless
-    // @param _data Json of the request's details (optional)
-    // @param _extension address of the extension contract of the request (optional) NOT USED YET
-    // @param _extensionParams array of parameters for the extension (optional) NOT USED YET
-    // @param _from address of the payee, default account will be used otherwise (optional)
-    // @return promise of the object containing the request signed
   }
 
-  // abstract model: any;
+  getTxDetails = async(req, res) => {
+    if (req.params && req.params.txHash) {
+      try {
+        const result = await this.rn.requestCoreService.getRequestByTransactionHash(req.params.txHash);
+        return res.status(200).json(result);
+      } catch (err) {
+        res.status(400).send(err);
+      }
+    } else {
+      res.status(400).send('missing txHash param');
+    }
+  }
 
   // // Get all
   // getAll = (req, res) => {
@@ -90,13 +98,7 @@ export default class RequestCtrl {
   //   });
   // }
 
-  // Get by id
-  // get = (req, res) => {
-  //   this.model.findOne({ _id: req.params.id }, (err, obj) => {
-  //     if (err) { return console.error(err); }
-  //     res.json(obj);
-  //   });
-  // }
+
 
   // Update by id
   // update = (req, res) => {
