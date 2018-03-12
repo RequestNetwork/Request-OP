@@ -40,7 +40,7 @@ export default class RequestCtrl {
             [this.web3.utils.toWei('0.175', 'ether')], // _expectedAmounts[]
             new Date().getTime() + 1000 * 60 * 60 * 24, // _expirationDate (1day)
             null, // _payeesPaymentAddress[]
-            JSON.stringify({ reason: `Order #${req.body.orderId} from Just Another Shop ` }), // _data
+            JSON.stringify({ reason: `Order #${req.body.orderId} from Just Another Shop `, orderId: req.body.orderId }), // _data
           );
           res.status(200).json(result);
         } catch (err) {
@@ -66,46 +66,5 @@ export default class RequestCtrl {
       res.status(400).send('missing txHash param');
     }
   }
-
-  // // Get all
-  // getAll = (req, res) => {
-  //   this.model.find({}, (err, docs) => {
-  //     if (err) { return console.error(err); }
-  //     res.json(docs);
-  //   });
-  // }
-
-  // // Count all
-  // count = (req, res) => {
-  //   this.model.count((err, count) => {
-  //     if (err) { return console.error(err); }
-  //     res.json(count);
-  //   });
-  // }
-
-  // Insert
-  // insert = (req, res) => {
-  //   const obj = new this.model(req.body);
-  //   obj.save((err, item) => {
-  //     // 11000 is the code for duplicate key error
-  //     if (err && err.code === 11000) {
-  //       res.sendStatus(400);
-  //     }
-  //     if (err) {
-  //       return console.error(err);
-  //     }
-  //     res.status(200).json(item);
-  //   });
-  // }
-
-
-
-  // Update by id
-  // update = (req, res) => {
-  //   this.model.findOneAndUpdate({ _id: req.params.id }, req.body, (err) => {
-  //     if (err) { return console.error(err); }
-  //     res.sendStatus(200);
-  //   });
-  // }
 
 }

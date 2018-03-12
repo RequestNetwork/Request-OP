@@ -17,7 +17,7 @@ import { MatDividerModule } from '@angular/material/divider';
 // import { MatListModule } from '@angular/material/list';
 // import { MatPaginatorModule } from '@angular/material/paginator';
 // import { MatProgressBarModule } from '@angular/material/progress-bar';
-// import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 // import { MatSelectModule } from '@angular/material/select';
 // import { MatSidenavModule } from '@angular/material/sidenav';
 // import { MatSnackBarModule } from '@angular/material/snack-bar';
@@ -49,7 +49,7 @@ import { MatDividerModule } from '@angular/material/divider';
     // MatListModule,
     // MatPaginatorModule,
     // MatProgressBarModule,
-    // MatProgressSpinnerModule,
+    MatProgressSpinnerModule,
     // MatSelectModule,
     // MatSidenavModule,
     // MatSnackBarModule,
@@ -80,7 +80,7 @@ import { MatDividerModule } from '@angular/material/divider';
     // MatListModule,
     // MatPaginatorModule,
     // MatProgressBarModule,
-    // MatProgressSpinnerModule,
+    MatProgressSpinnerModule,
     // MatSelectModule,
     // MatSidenavModule,
     // MatSnackBarModule,

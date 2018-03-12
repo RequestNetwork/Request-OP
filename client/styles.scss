@@ -39,6 +39,10 @@ a {
   }
 }
 
+.fc-warn {
+  color: $warn;
+}
+
 // fix chrome autofill theme
 input {
   &:-webkit-autofill {

@@ -4,11 +4,18 @@
       <img class="mr-3" [style.maxWidth]="'50px'" src="assets/nyan.png">
       <span [style.color]="'#8300FF'">Just another shop</span>
     </div>
-    <div class="order-card">
-      <p class="d-flex justify-content-between">
-        <span>Check-out</span>
-        <span><u>order #{{ this.orderId }}</u></span>
-      </p>
+    <div class="order-card text-center">
+      <div *ngIf="missingTxHash; else txTemplate">
+        <i class="fc-warn">missing txHash parameter in url</i>
+      </div>
+      <ng-template #txTemplate>
+        <div *ngIf="request; else waitingForTxInfoTemplate">
+        </div>
+        <ng-template #waitingForTxInfoTemplate>
+          <mat-spinner class="mx-auto mb-5" [diameter]="30"></mat-spinner>
+          <p>Searching for transaction information...</p>
+        </ng-template>
+      </ng-template>
     </div>
   </div>
 </section>
