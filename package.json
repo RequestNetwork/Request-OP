@@ -27,7 +27,7 @@
     "@angular/platform-browser": "^5.2.0",
     "@angular/platform-browser-dynamic": "^5.2.0",
     "@angular/router": "^5.2.0",
-    "@requestnetwork/request-network.js": "0.3.4",
+    "@requestnetwork/request-network.js": "0.3.6",
     "bootstrap": "^4.0.0",
     "concurrently": "^3.5.1",
     "core-js": "^2.4.1",
@@ -42,7 +42,7 @@
     "rxjs": "^5.5.6",
     "truffle-hdwallet-provider": "0.0.3",
     "web-animations-js": "^2.3.1",
-    "web3": "^1.0.0-beta.30",
+    "web3": "1.0.0-beta.29",
     "web3-provider-engine": "^13.6.5",
     "zone.js": "^0.8.19"
   },
