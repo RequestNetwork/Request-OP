@@ -8,7 +8,7 @@ import { ConfirmComponent } from './confirm/confirm.component';
 const routes: Routes = [
   // { pathMatch: 'full', path: '', component: ShopComponent },
   { pathMatch: 'full', path: 'shop', component: ShopComponent },
-  { pathMatch: 'full', path: 'confirm', component: ConfirmComponent },
+  { pathMatch: 'full', path: 'confirm/:txHash', component: ConfirmComponent },
   { pathMatch: 'full', path: '**', redirectTo: '/shop' },
 ];
 

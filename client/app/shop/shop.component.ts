@@ -19,7 +19,7 @@ export class ShopComponent {
   callbackUrl: string;
 
   constructor(@Inject(DOCUMENT) private document: any, private requestService: RequestService) {
-    this.callbackUrl = `${this.document.location.origin}/#/confirm`;
+    this.callbackUrl = `${this.document.location.origin}/#/confirm/`;
   }
 
   getTotal() {

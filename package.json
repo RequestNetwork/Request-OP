@@ -27,7 +27,7 @@
     "@angular/platform-browser": "^5.2.0",
     "@angular/platform-browser-dynamic": "^5.2.0",
     "@angular/router": "^5.2.0",
-    "@requestnetwork/request-network.js": "0.3.3",
+    "@requestnetwork/request-network.js": "0.3.4",
     "bootstrap": "^4.0.0",
     "concurrently": "^3.5.1",
     "core-js": "^2.4.1",
