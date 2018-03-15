@@ -12,8 +12,9 @@ export class ShopComponent {
   items = [
     { desc: 'Ledger Nano S', priceUnit: 0.083, quantity: 1 },
     { desc: 'Trezor', priceUnit: 0.086, quantity: 0 },
-    { desc: 'Cryptosteel Mnemonic', priceUnit: 0.092, quantity: 1 },
+    { desc: 'Cryptosteel Mnemonic', priceUnit: 0.092, quantity: 1 }
   ];
+
   orderId = '030890';
   gatewayUrl = 'http://localhost:8080/#/pay-with-request';
   callbackUrl: string;
@@ -32,7 +33,7 @@ export class ShopComponent {
 
   payWithEth() {
     console.log('click on pay with ETH');
-    this.requestService.signRequest({orderId: this.orderId}).subscribe(
+    this.requestService.signRequest({ orderId: this.orderId }).subscribe(
       res => {
         if (res.signature) {
           this.document.location.href = `${this.gatewayUrl}?data=${encodeURIComponent(JSON.stringify({signedRequest: res, callbackUrl: this.callbackUrl}))}`;

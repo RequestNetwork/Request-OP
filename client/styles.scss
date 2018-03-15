@@ -3,7 +3,6 @@
 
 @import '~font-awesome/scss/font-awesome';
 // @import url('//fonts.googleapis.com/icon?family=Material+Icons');
-
 @import '~bootstrap/scss/bootstrap-reboot';
 @import '~bootstrap/scss/bootstrap-grid';
 @import '~bootstrap/scss/utilities';
@@ -41,6 +40,14 @@ a {
 
 .fc-warn {
   color: $warn;
+}
+
+.fs-18 {
+  font-size: 18px;
+}
+
+.fs-12 {
+  font-size: 12px;
 }
 
 // fix chrome autofill theme

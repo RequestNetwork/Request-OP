@@ -8,6 +8,8 @@ import { RequestService } from '../services/request.service';
   styleUrls: ['./confirm.component.scss']
 })
 export class ConfirmComponent implements OnInit {
+  txInfos: any;
+  error: any;
 
   constructor(public router: Router, private route: ActivatedRoute, private requestService: RequestService) {}
 
@@ -15,10 +17,10 @@ export class ConfirmComponent implements OnInit {
   ngOnInit() {
     this.requestService.getTxDetails(this.route.snapshot.params.txHash).subscribe(
       res => {
-        console.log(res);
+        this.txInfos = res;
       },
       error => {
-        console.log(error);
+        this.error = error;
       }
     );
   }

@@ -5,7 +5,21 @@
       <span [style.color]="'#8300FF'">Just another shop</span>
     </div>
     <div class="order-card text-center">
-      <div *ngIf="request; else waitingForTxInfoTemplate">
+      <div *ngIf="txInfos || error; else waitingForTxInfoTemplate">
+        <div *ngIf="txInfos">
+          <img src="assets/checked-icon.svg" [style.width]="'32px'" class="my-3">
+          <p class="fs-18">Payment for order Id #{{ txInfos.ipfsData.orderId }} confirmed</p>
+          <p class="fs-12 my-4">You can continue shopping if you want!</p>
+        </div>
+        <div *ngIf="error">
+          <img src="assets/cancel-icon.svg" [style.width]="'32px'" class="my-3">
+          <p class="fc-warn mb-4">{{ error._body }}</p>
+        </div>
+        <div>
+          <a mat-raised-button color="accent" routerLink="/shop">
+            Back to the shop
+          </a>
+        </div>
       </div>
       <ng-template #waitingForTxInfoTemplate>
         <mat-spinner class="mx-auto mb-5" [diameter]="30"></mat-spinner>

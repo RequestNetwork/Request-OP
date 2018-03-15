@@ -13,23 +13,11 @@ export class RequestService {
   constructor(private http: Http) {}
 
   signRequest(request): Observable < any > {
-    return this.http.post('/api/signRequest', JSON.stringify(request), this.options).map(
-      res => {
-        return res.json();
-      },
-      err => {
-        return err;
-      });
+    return this.http.post('/api/signRequest', JSON.stringify(request), this.options).map(res => res.json());
   }
 
   getTxDetails(txHash): Observable < any > {
-    return this.http.get(`/api/getTxDetails/${txHash}`, this.options).map(
-      res => {
-        return res.json();
-      },
-      err => {
-        return err;
-      });
+    return this.http.get(`/api/getTxDetails/${txHash}`, this.options).map(res => res.json());
   }
 
 }
