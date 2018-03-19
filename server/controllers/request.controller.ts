@@ -1,9 +1,6 @@
 import RequestNetwork from '@requestnetwork/request-network.js';
 
 import * as HDWalletProvider from 'truffle-hdwallet-provider';
-import * as ProviderEngine from 'web3-provider-engine';
-import * as ethereumjsWallet from 'ethereumjs-wallet';
-import * as WalletSubprovider from 'web3-provider-engine/subproviders/wallet';
 
 const Web3 = require('web3');
 

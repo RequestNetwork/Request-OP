@@ -17,6 +17,7 @@ export class ShopComponent {
 
   orderId = '030890';
   gatewayUrl = 'http://localhost:8080/#/pay-with-request';
+  // gatewayUrl = 'http://app.request.network/#/pay-with-request';
   callbackUrl: string;
 
   constructor(@Inject(DOCUMENT) private document: any, private requestService: RequestService) {
