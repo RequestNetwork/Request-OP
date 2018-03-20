@@ -2,7 +2,7 @@ import RequestNetwork from '@requestnetwork/request-network.js';
 
 import * as HDWalletProvider from 'truffle-hdwallet-provider';
 
-const Web3 = require('web3');
+import Web3 = require('web3');
 
 export default class RequestCtrl {
 
