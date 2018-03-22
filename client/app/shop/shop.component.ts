@@ -16,7 +16,7 @@ export class ShopComponent {
   ];
 
   orderId = '030890';
-  gatewayUrl = 'http://localhost:8080/#/pay-with-request';
+  gatewayUrl = 'http://localhost:8080/#/pay-with-request/';
   // gatewayUrl = 'http://app.request.network/#/pay-with-request';
   callbackUrl: string;
 
@@ -37,7 +37,7 @@ export class ShopComponent {
     this.requestService.signRequest({ orderId: this.orderId }).subscribe(
       res => {
         if (res.signature) {
-          this.document.location.href = `${this.gatewayUrl}?data=${encodeURIComponent(JSON.stringify({signedRequest: res, callbackUrl: this.callbackUrl}))}`;
+          this.document.location.href = `${this.gatewayUrl}${encodeURIComponent(JSON.stringify({signedRequest: res, callbackUrl: this.callbackUrl}))}`;
         }
       },
       error => {

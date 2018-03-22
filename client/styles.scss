@@ -50,7 +50,13 @@ a {
   font-size: 12px;
 }
 
-// fix chrome autofill theme
+.text-overflow-scroll {
+  white-space: nowrap;
+  overflow: scroll;
+  text-overflow: ellipsis;
+}
+
+// fsix chrome autofill theme
 input {
   &:-webkit-autofill {
     -webkit-text-fill-color: $blue-grey !important;

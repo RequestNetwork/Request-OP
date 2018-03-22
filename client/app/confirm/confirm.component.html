@@ -13,7 +13,7 @@
         </div>
         <div *ngIf="error">
           <img src="assets/cancel-icon.svg" [style.width]="'32px'" class="my-3">
-          <p class="fc-warn mb-4">{{ error._body }}</p>
+          <p class="fc-warn mb-4 text-overflow-scroll">{{ error._body }}</p>
         </div>
         <div>
           <a mat-raised-button color="accent" routerLink="/shop">

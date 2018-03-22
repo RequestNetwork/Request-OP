@@ -1,16 +1,16 @@
 import RequestNetwork from '@requestnetwork/request-network.js';
 
-import * as HDWalletProvider from 'truffle-hdwallet-provider';
+const HDWalletProvider = require('truffle-hdwallet-provider');
 
-import Web3 = require('web3');
+const Web3 = require('web3');
 
 export default class RequestCtrl {
 
   private web3;
   private rn;
-  private infuraNodeUrl = 'https://rinkeby.infura.io/BQBjfSi5EKSCQQpXebO';
+  private infuraNodeUrl = 'https://rinkeby.infura.io/';
   private payeeIdAddress = '0x8F0255e24B99825e9AD4bb7506678F18C630453F';
-  private payeePaymentAddress = '0x53f2bdd6165b89003909abae792603e342bbff0b';
+  private payeePaymentAddress = '0xf9DF490146b29418a59F43dDb4Afc57Cd3fEf856';
 
   private order = {
     orderId: '030890',
@@ -41,7 +41,7 @@ export default class RequestCtrl {
         const result = await this.rn.requestEthereumService.signRequestAsPayee(
           [this.payeeIdAddress], // _payeesIdAddress[]
           [this.web3.utils.toWei(this.order.totalAmount, 'ether')], // _expectedAmounts[]
-          new Date().getTime() + 1000 * 60 * 60 * 24, // _expirationDate (1day)
+          new Date().getTime() + 1000 * 60 * 60, // _expirationDate (1hour)
           [this.payeePaymentAddress], // _payeesPaymentAddress[]
           JSON.stringify({ reason: `Order #${req.body.orderId} from Just Another Shop `, orderId: req.body.orderId }), // _data
         );
