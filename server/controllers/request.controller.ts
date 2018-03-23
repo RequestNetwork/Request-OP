@@ -10,7 +10,7 @@ export default class RequestCtrl {
   private rn;
   private infuraNodeUrl = 'https://rinkeby.infura.io/';
   private payeeIdAddress = '0x8F0255e24B99825e9AD4bb7506678F18C630453F';
-  private payeePaymentAddress = '0xf9DF490146b29418a59F43dDb4Afc57Cd3fEf856';
+  private payeePaymentAddress = null;
 
   private order = {
     orderId: '030890',

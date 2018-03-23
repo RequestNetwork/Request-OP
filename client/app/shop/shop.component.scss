@@ -1,11 +1,9 @@
-@import url(http://fonts.googleapis.com/css?family=Poppins);
 @import 'variables';
 @import 'mixins';
 
 .shop {
   @include background-cover();
   background: #F7F8FA;
-  font-family: 'Poppins', sans-serif;
 }
 
 .container {
