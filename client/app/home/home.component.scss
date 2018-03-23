@@ -70,6 +70,10 @@ h3 {
   font-weight: 600;
 }
 
+h4 {
+  font-size: 1.125rem;
+}
+
 
 .subtitle {
   color: $grey-op;
@@ -79,8 +83,7 @@ button {
   font-size: 1.125rem;
   font-weight: 500;
   border-radius: 5px;
-  min-width: 11rem;
-  min-height: 3rem;
+  height: 3rem;
 }
 
 button.demo-button {
@@ -89,9 +92,9 @@ button.demo-button {
   margin-right: 2rem;
 }
 
-button.get-started-button {
+button.gradient-button {
   color: #fff;
-  background-image: linear-gradient(to right, #0470DC, #13F1FC);
+  background-image: linear-gradient(to right, $gradient-blue-op, $gradient-blue2-op);
   border: transparent;
 }
 
@@ -105,9 +108,6 @@ section.why-accept-section {
       max-width: 100%;
       width: 175px;
       margin: 0 auto;
-    }
-    p {
-      @extend .subtitle;
     }
   }
 }
@@ -124,7 +124,7 @@ section.free-section {
     // padding: 1.5rem 3rem;
     border-radius: 5px;
     border-bottom: solid 1.25rem transparent;
-    background-image: linear-gradient(white, white), linear-gradient(to left, #0470DC, #13F1FC);
+    background-image: linear-gradient(white, white), linear-gradient(to left, $gradient-blue-op, $gradient-blue2-op);
     background-clip: content-box, border-box;
     h1 {
       text-align: center;
@@ -156,6 +156,43 @@ section.free-section {
     span.asterisk {
       font-size: 0.6875rem;
       color: $grey-op;
+    }
+  }
+}
+
+section.code-section {
+  background: #fff;
+  color: $blue-op;
+}
+
+section.help-section {
+  background: linear-gradient(to bottom, $gradient-blue-op, $gradient-blue3-op);
+  color: #fff;
+  p {
+    font-size: 1.125rem;
+  }
+  .request-hub-button {
+    color: #fff;
+    border: 2px solid #fff;
+  }
+}
+
+section.up-to-date-section {
+  background: $light-grey-op;
+  color: $blue-op;
+}
+
+section.footer-section {
+  background: linear-gradient(90deg, #0D1223, #1A274C);
+  color: #fff;
+  a {
+    color: #fff;
+  }
+
+  .footer-column {
+    a {
+      margin: 0.5rem 0;
+      color: #617B9F;
     }
   }
 }

@@ -22,9 +22,9 @@
       <div class="col-12 d-flex flex-column justify-content-center mb-5 py-5">
         <h1 class="mb-3">Enabling effortless<br/>cryptocurrency payments</h1>
         <p class="subtitle">A fully decentralized solution to accept cryptocurrencies on your website</p>
-        <div class="d-flex my-4">
-          <button class="demo-button" mat-button color="accent">Demo</button>
-          <button class="get-started-button" mat-button color="accent">Get started</button>
+        <div class="d-flex justify-content-between" [style.maxWidth]="'400px'">
+          <button class="flex-1 demo-button" mat-button color="accent">Demo</button>
+          <button class="flex-1 gradient-button" mat-button color="accent">Get started</button>
         </div>
       </div>
     </div>
@@ -39,17 +39,17 @@
           <div class="why-accept-block col-md-3 d-flex flex-column">
             <img src="assets/secure.png">
             <h3 class="my-3">Secure</h3>
-            <p>By using blockchain technology, no risk of non-payments</p>
+            <div class="subtitle">By using blockchain technology, no risk of non-payments</div>
           </div>
           <div class="why-accept-block col-md-3 d-flex flex-column">
             <img src="assets/interoperable.png">
             <h3 class="my-3">Interoperable</h3>
-            <p>Integrate cryptocurrency payments into your accounting like any other payment</p>
+            <div class="subtitle">Integrate cryptocurrency payments into your accounting like any other payment</div>
           </div>
           <div class="why-accept-block col-md-3 d-flex flex-column">
             <img src="assets/no-third-party.png">
             <h3 class="my-3">No third party</h3>
-            <p>No one is in possession of your personal information</p>
+            <div class="subtitle">No one is in possession of your personal information</div>
           </div>
         </div>
       </div>
@@ -67,7 +67,7 @@
           <img class="img-fluid" src="assets/earth.png">
         </div>
         <div class="col-12 col-lg-6 mt-5">
-          <div class="mb-5">
+          <div>
             <h3>The first real blockchain payment solution</h3>
             <p class="subtitle">We offer an end-to-end payment solution that doesn't leave the blockchain. Have full control over your full financial flows without depending on intermediaries</p>
           </div>
@@ -75,7 +75,7 @@
             <h3>Don't trust us. Trust code</h3>
             <p class="subtitle">Payments are settled on the blockchain by immutable code, making your transactions 100% tamper-proof</p>
           </div>
-          <div class="my-5">
+          <div>
             <h3>Want to change anything? You can</h3>
             <p class="subtitle">As all our products are open source, you can customize and build everything you like on top of the Request Network platform yourself</p>
           </div>
@@ -97,20 +97,106 @@
               <div class="free-list">
                 <p class="d-flex">
                   <img src="/assets/check.png">
-                  <span>Receive 100% of your asking price.<br/>No merchant fees</span>
+                  <span>Receive 100% of your asking price.
+                    <br/>No merchant fees</span>
                 </p>
                 <p class="d-flex">
                   <img src="/assets/check.png">
-                  <span>Receive payments instantly.<br/>No delays</span>
+                  <span>Receive payments instantly.
+                    <br/>No delays</span>
                 </p>
                 <p class="d-flex">
                   <img src="/assets/check.png">
-                  <span>Receive guaranteed payments.<br/>No risk</span>
+                  <span>Receive guaranteed payments.
+                    <br/>No risk</span>
                 </p>
               </div>
             </div>
             <span class="asterisk pull-right">*0.1% fee + transaction cost for the customer&nbsp;</span>
           </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="code-section py-5">
+  <div class="container py-5">
+    <div class="row">
+      <div class="col-12">
+        <h2 class="pb-3 text-center">Start accepting cryptocurrencies<br/>and increase your sales in minutes</h2>
+        <div class="d-flex mt-5">
+          insert code box here
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- TO PLUGIN SECTION -->
+<section class="help-section py-5">
+  <div class="container py-5">
+    <div class="row">
+      <div class="col-12">
+        <h2 class="pb-3 text-center">Need a little bit more help?</h2>
+        <div class="mt-5 col-lg-8 text-center mx-auto">
+          <p>Can't find the answers you are looking for in the documentation?</p>
+          <p class="my-5">We welcome you to join the Request Network Hub on Slack.</p>
+          <p>This community of developers and builders is actively expanding the ecosystem daily and loves to support you in answering all your questions.</p>
+          <button class="px-5 mt-5 request-hub-button" mat-button color="accent">Ask the community</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="up-to-date-section py-5">
+  <div class="container py-5">
+    <div class="row">
+      <div class="col-12">
+        <h2 class="pb-3 text-center">Stay up-to-date<br/>when new features & cryptocurrencies are available</h2>
+        <div class="mt-5 col-lg-8 text-center mx-auto">
+          <button class="gradient-button px-5" mat-button color="accent">Sign up</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="footer-section py-5">
+  <div class="container py-5">
+    <div class="row">
+      <div class="col-12 d-flex flex-wrap justify-content-between">
+        <div class="d-flex flex-column">
+          <div class="mb-3" [style.maxWidth]="'28px'">
+            <img class="img-fluid" src="assets/request-logo.png">
+          </div>
+          <h4>Powered by</h4>
+          <h4><a target="_blank" href="https://request.network" [style.textDecoration]="'underline'">Request Network</a></h4>
+          <div class="d-flex justify-content-between" [style.maxWidth]="'10rem'">
+            <a target="_blank" href="https://blog.request.network"><i class="fa fa-medium" aria-hidden="true"></i></a>
+            <a target="_blank" href="https://twitter.com/requestnetwork"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+            <a target="_blank" href="https://www.reddit.com/r/RequestNetwork/"><i class="fa fa-reddit-alien" aria-hidden="true"></i></a>
+            <a target="_blank" href="https://t.me/requestnetwork"><i class="fa fa-telegram" aria-hidden="true"></i></a>
+            <a target="_blank" href="https://github.com/RequestNetwork/"><i class="fa fa-github" aria-hidden="true"></i></a>
+            <a target="_blank" href="https://requesthub.slack.com/join/shared_invite/enQtMjkwNDQwMzUwMjI3LWNlYTlmODViMmE3MzY0MWFiMTUzYmNiMWEyZmNiNWZhMjM3MTEzN2JkZTMxN2FhN2NmODFkNmU5MDBmOTUwMjA"><i class="fa fa-slack" aria-hidden="true"></i></a>
+            <a target="_blank" href="https://www.facebook.com/Request-Network-140279756554525/"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+          </div>
+        </div>
+        <div class="footer-column d-flex flex-column">
+          <h3>Platform</h3>
+          <a href="https://github.com/RequestNetwork/" target="_blank">Github</a>
+          <a href="https://github.com/RequestNetwork/requestNetwork" target="_blank">Library</a>
+          <a href="https://blog.request.network/request-network-project-update-january-19th-2018-announcing-a-30-million-request-fund-6a6f87d27d43" target="_blank">Develop with Request</a>
+          <a target="_blank" href="https://request.network/assets/pdf/request_whitepaper.pdf">Whitepaper</a>
+        </div>
+        <div class="footer-column d-flex flex-column">
+          <h3>Product</h3>
+          <a routerlink="/shop" target="_blank">Demo</a>
+          <a routerlink="/doc" target="_blank">Documentation</a>
+          <a href="https://requesthub.slack.com/join/shared_invite/enQtMjkwNDQwMzUwMjI3LWNlYTlmODViMmE3MzY0MWFiMTUzYmNiMWEyZmNiNWZhMjM3MTEzN2JkZTMxN2FhN2NmODFkNmU5MDBmOTUwMjA" target="_blank">Help center</a>
+        </div>
+        <div class="footer-column d-flex flex-column">
+          <h3>Organization</h3>
+          <a href="https://request.network/" target="_blank">About</a>
+          <a href="https://request.network/#/jobs" target="_blank">Join the team</a>
+          <a routerlink="/contact" target="_blank">Contact</a>
         </div>
       </div>
     </div>
