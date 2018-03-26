@@ -6,10 +6,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
+  screenWidth: number;
 
-  constructor() { }
-
-  ngOnInit() {
+  constructor() {
+    this.screenWidth = window.innerWidth;
+    window.onresize = () => {
+      this.screenWidth = window.innerWidth;
+    };
   }
+
+  ngOnInit() {}
 
 }
