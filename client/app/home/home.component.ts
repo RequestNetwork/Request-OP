@@ -1,6 +1,5 @@
 import { Component, Inject, ViewChild } from '@angular/core';
 import { DOCUMENT } from '@angular/platform-browser';
-
 import { PageScrollConfig, PageScrollService, PageScrollInstance } from 'ngx-page-scroll';
 
 @Component({

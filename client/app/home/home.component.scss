@@ -86,21 +86,25 @@ h4 {
   color: $grey-op;
 }
 
-button {
+button,
+a.button {
   font-size: 1.125rem;
   font-weight: 500;
   border-radius: 5px;
-  height: 3rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
 }
 
-button.demo-button {
+.demo-button {
   color: $electric-blue-op;
+  font-weight: 500;
   border: 1px solid $electric-blue-op;
   margin-right: 2rem;
 }
 
-button.gradient-button {
+.gradient-button {
   color: #fff;
+  font-weight: 500;
   background-image: linear-gradient(to right, $gradient-blue-op, $gradient-blue2-op);
   border: transparent;
 }
@@ -170,6 +174,9 @@ section.free-section {
 section.code-section {
   background: #fff;
   color: $blue-op;
+  a.get-library {
+    color: $electric-blue-op;
+  }
 }
 
 section.help-section {
@@ -180,6 +187,7 @@ section.help-section {
   }
   .request-hub-button {
     color: #fff;
+    font-weight: 700;
     border: 2px solid #fff;
   }
 }
