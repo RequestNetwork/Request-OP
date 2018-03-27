@@ -1,12 +1,15 @@
-<mat-sidenav-container>
+<ng-template #menuLinks>
+  <a routerLink="/shop" target="_blank">Demo</a>
+  <a href="/how-to">Documentation</a>
+  <a (click)="scrollTo('#helpSection')">Help Center</a>
+</ng-template>
+<mat-sidenav-container class="h-100" #sidenavContainer>
   <mat-sidenav #sidenav mode="over">
     <div class="d-flex flex-column align-items-start sidenav">
       <div class="request-logo mx-auto my-3">
         <img class="img-fluid" src="assets/request-logo.png">
       </div>
-      <a href="">Demo</a>
-      <a href="">Documentation</a>
-      <a href="">Help Center</a>
+      <ng-container *ngTemplateOutlet="menuLinks"></ng-container>
     </div>
   </mat-sidenav>
   <mat-sidenav-content>
@@ -30,9 +33,7 @@
                 </div>
               </a>
               <div class="d-flex justify-content-between align-items-center menu">
-                <a href="">Demo</a>
-                <a href="">Documentation</a>
-                <a href="">Help Center</a>
+                <ng-container *ngTemplateOutlet="menuLinks"></ng-container>
               </div>
             </ng-template>
           </div>
@@ -40,7 +41,7 @@
         <div class="row flex-1">
           <div class="col-12 d-flex flex-column justify-content-center mb-5 py-5">
             <h1 class="mb-3">Enabling effortless<br/>cryptocurrency payments</h1>
-            <p class="subtitle">A fully decentralized solution to accept cryptocurrencies on your website</p>
+            <p class="subtitle mb-5">A fully decentralized solution to accept cryptocurrencies on your website</p>
             <div class="d-flex justify-content-between" [style.maxWidth]="'400px'">
               <button class="flex-1 demo-button" mat-button color="accent">Demo</button>
               <button class="flex-1 gradient-button" mat-button color="accent">Get started</button>
@@ -151,7 +152,7 @@
       </div>
     </section>
     <!-- TO PLUGIN SECTION -->
-    <section class="help-section py-5">
+    <section class="help-section py-5" id="helpSection">
       <div class="container py-5">
         <div class="row">
           <div class="col-12">

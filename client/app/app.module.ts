@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { SharedModule } from './shared/shared.module';
+import { NgxPageScrollModule } from 'ngx-page-scroll';
 
 import { RequestService } from './services/request.service';
 
@@ -19,7 +20,8 @@ import { HomeComponent } from './home/home.component';
   ],
   imports: [
     SharedModule,
-    AppRoutingModule
+    AppRoutingModule,
+    NgxPageScrollModule
   ],
   providers: [
     RequestService
