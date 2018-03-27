@@ -1,6 +1,6 @@
 <ng-template #menuLinks>
   <a routerLink="/shop" target="_blank">Demo</a>
-  <a routerLink="/how-to" target="_blank">Documentation</a>
+  <a [href]="docUrl" target="_blank">Documentation</a>
   <a (click)="scrollTo('#helpSection')">Help Center</a>
 </ng-template>
 <mat-sidenav-container class="h-100" #sidenavContainer>
@@ -44,7 +44,7 @@
             <p class="subtitle mb-5">A fully decentralized solution to accept cryptocurrencies on your website</p>
             <div class="d-flex justify-content-between" [style.maxWidth]="'400px'">
               <a routerLink="/shop" target="_blank" class="flex-1 button demo-button" mat-button color="accent">Demo</a>
-              <a routerLink="/how-to" target="_blank" class="flex-1 button gradient-button" mat-button color="accent">Get started</a>
+              <a [href]="docUrl" target="_blank" class="flex-1 button gradient-button" mat-button color="accent">Get started</a>
             </div>
           </div>
         </div>
@@ -145,7 +145,7 @@
           <div class="col-12">
             <h2 class="pb-3 text-center">Start accepting cryptocurrencies<br/>and increase your sales in minutes</h2>
             <div class="d-flex mt-5">
-              <h3><a class="get-library" href="https://github.com/RequestNetwork/requestNetwork/tree/master/packages/requestNetwork.js" target="_blank">Get started with the library<i class="px-3 fa fa-external-link" aria-hidden="true"></i></a></h3>
+              <h3><a class="get-library" [href]="docUrl" target="_blank">Get started with the library<i class="px-3 fa fa-external-link" aria-hidden="true"></i></a></h3>
             </div>
           </div>
         </div>

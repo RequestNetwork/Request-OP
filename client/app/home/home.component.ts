@@ -10,7 +10,7 @@ import { PageScrollConfig, PageScrollService, PageScrollInstance } from 'ngx-pag
 export class HomeComponent {
   @ViewChild('sidenavContainer') private sidenavContainer;
   @ViewChild('sidenav') private sidenav;
-
+  public docUrl: string;
   public screenWidth: number;
 
   constructor(private pageScrollService: PageScrollService, @Inject(DOCUMENT) private document: any) {
@@ -23,6 +23,8 @@ export class HomeComponent {
         return c / 2 * (-Math.pow(2, -10 * --t) + 2) + b;
       }
     };
+
+    this.docUrl = `${window.location.origin}/doc`;
 
     this.screenWidth = window.innerWidth;
     window.onresize = () => {
