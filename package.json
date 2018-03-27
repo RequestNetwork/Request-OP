@@ -6,10 +6,10 @@
     "ng": "ng",
     "start": "node dist/server/app.js",
     "prebuild": "tsc -p server",
-    "predev": "tsc -p server",
     "build": "ng build --prod --aot --build-optimizer",
+    "postbuild": "cd slate && bundle exec middleman build --clean && cd .. && rimraf dist/doc && cp -a slate/build dist/doc",
+    "predev": "tsc -p server",
     "dev": "concurrently \"ng serve --delete-output-path=false -pc proxy.conf.json\" \"tsc -w -p server\" \"nodemon dist/server/app.js\"",
-    "prod": "concurrently \"ng build --prod --aot --build-optimizer && tsc -p server && node dist/server/app.js\"",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"

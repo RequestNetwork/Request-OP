@@ -1,5 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { RequestService } from '../services/request.service';
+import { environment } from  '../../environments/environment'
 
 import { DOCUMENT } from '@angular/platform-browser';
 
@@ -16,8 +17,7 @@ export class ShopComponent {
   ];
 
   orderId = '030890';
-  gatewayUrl = 'http://localhost:8080/#/pay-with-request/';
-  // gatewayUrl = 'http://app.request.network/#/pay-with-request';
+  gatewayUrl = environment.gatewayUrl;
   callbackUrl: string;
 
   constructor(@Inject(DOCUMENT) private document: any, private requestService: RequestService) {
