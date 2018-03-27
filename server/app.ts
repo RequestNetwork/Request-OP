@@ -12,6 +12,8 @@ dotenv.load({ path: '.env' });
 app.set('port', (process.env.PORT || 3000));
 
 app.use('/', express.static(path.join(__dirname, '../public')));
+app.use('/doc', express.static(path.join(__dirname, '../doc')));
+
 
 app.use(bodyParser.json({ limit: '50mb' }));
 app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
@@ -20,7 +22,10 @@ app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 
 setRoutes(app);
 
-app.get('/*', function(req, res) {
+app.get('/doc', function(req, res) {
+  res.sendFile(path.join(__dirname, '../doc/index.html'));
+});
+app.get('/', function(req, res) {
   res.sendFile(path.join(__dirname, '../public/index.html'));
 });
 
