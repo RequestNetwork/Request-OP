@@ -1,7 +1,6 @@
 import * as bodyParser from 'body-parser';
 import * as dotenv from 'dotenv';
 import * as express from 'express';
-import * as morgan from 'morgan';
 import * as mongoose from 'mongoose';
 import * as path from 'path';
 
@@ -18,14 +17,12 @@ app.use('/doc', express.static(path.join(__dirname, '../doc')));
 app.use(bodyParser.json({ limit: '50mb' }));
 app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 
-// app.use(morgan('dev'));
-
 setRoutes(app);
 
 app.get('/doc', function(req, res) {
   res.sendFile(path.join(__dirname, '../doc/index.html'));
 });
-app.get('/', function(req, res) {
+app.get('/*', function(req, res) {
   res.sendFile(path.join(__dirname, '../public/index.html'));
 });
 
