@@ -253,15 +253,12 @@
             <a href="#verifying-txhash-information" class="toc-h1 toc-link" data-title="verifying-txhash-information">Verifying txHash information</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#getting-request-by-txhash" class="toc-h2 toc-link" data-title="getting-request-by-txhash">Getting request by txHash</a>
+                    <a href="#getting-transaction-data" class="toc-h2 toc-link" data-title="getting-transaction-data">Getting transaction data</a>
                   </li>
                   <li>
-                    <a href="#verifying-transaction-data" class="toc-h2 toc-link" data-title="verifying-transaction-data">Verifying transaction data</a>
+                    <a href="#getting-request-data" class="toc-h2 toc-link" data-title="getting-request-data">Getting request data</a>
                   </li>
               </ul>
-          </li>
-          <li>
-            <a href="#errors" class="toc-h1 toc-link" data-title="errors">Errors</a>
           </li>
       </div>
         <ul class="toc-footer">
@@ -478,9 +475,15 @@ Signing a request costs no fee, as the request is not broadcasted on the blockch
 <p><code>https://myCallbackUrl/0xb8e90ba15bb09d1b5baba628fcc01d0302d8d47dc854e85e6deeb5c60f6d3f2b</code></p>
 
 <p>Otherwise, if the payer click on &#39;cancel &amp; go back to merchant&#39;, the gateway will redirect to the <strong>callbackUrl</strong> concatenated with the signed request json object stringified.</p>
+
+<aside class="success">
+Your signature ensure that only the information you signed can be broadcasted on ethereum's blockchain
+</aside>
 <h1 id='verifying-txhash-information'>Verifying txHash information</h1>
 <p>One can retrieve all the information of a transaction with only its tx hash. This allows the payer to have a seemless payment experience.</p>
-<h2 id='getting-request-by-txhash'>Getting request by txHash</h2>
+
+<p>Merchant will then have to carry out a series of tests in order to verify the transaction does match a request you signed.</p>
+<h2 id='getting-transaction-data'>Getting transaction data</h2>
 <blockquote>
 <p>Example:</p>
 </blockquote>
@@ -540,6 +543,8 @@ Signing a request costs no fee, as the request is not broadcasted on the blockch
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
+<p>The library provides a method for getting the transaction information from a txHash:</p>
+
 <p><strong><code>async requestnetwork.requestCoreService.getRequestByTransactionHash(txHash)</code></strong></p>
 
 <table><thead>
@@ -555,66 +560,48 @@ Signing a request costs no fee, as the request is not broadcasted on the blockch
 <td>hash of the ethereum transaction</td>
 </tr>
 </tbody></table>
-<h2 id='verifying-transaction-data'>Verifying transaction data</h2>
-<p>You&#39;ll then have to carry out a series of tests in order to verify the transaction does match a request you signed.</p>
 
-<p>first condition to check is that the transaction method name is <code>broadcastSignedRequestAsPayer</code></p>
-<h1 id='errors'>Errors</h1>
+<p>first condition to check is that the <code>transaction.method.name == &#39;broadcastSignedRequestAsPayer&#39;</code></p>
+
 <aside class="notice">
-This error section is stored in a separate file in <code>includes/_errors.md</code>. Slate allows you to optionally separate out your docs into many files...just save them to the <code>includes</code> folder and add them to the top of your <code>index.md</code>'s frontmatter. Files are included in the order listed.
+From that point if you stored the signed request information on a database, you can just need to verify `transaction.method.parameters._signature` matches a known signature
+And then verify the amount 
 </aside>
+<h2 id='getting-request-data'>Getting request data</h2>
+<blockquote>
+<p>Example:</p>
+</blockquote>
+<pre class="highlight javascript tab-javascript"><code><span class="nx">data</span> <span class="o">=</span> <span class="nx">requesnetwork</span><span class="p">.</span><span class="nx">requestCoreService</span><span class="p">.</span><span class="nx">parseBytesRequest</span><span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">transaction</span><span class="p">.</span><span class="nx">method</span><span class="p">.</span><span class="nx">parameters</span><span class="p">.</span><span class="nx">_requestData</span><span class="p">);</span>
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"creator"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0x8f0255e24b99825e9ad4bb7506678f18c630453f"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"payer"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0x0000000000000000000000000000000000000000"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"mainPayee"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0x8f0255e24b99825e9ad4bb7506678f18c630453f"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"expectedAmount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"26db992a3b18000"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"subPayees"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"QmSsrdAPhD5UkRVDKVpCwf63nrUxBaNbYmpZ2njbku9Mi5"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>If you need to verify additional information, the library provides a method for getting the request information from transaction bytes:</p>
 
-<p>The Kittn API uses the following error codes:</p>
+<p><strong><code>requestnetwork.requestCoreService.parseBytesRequest(requestData)</code></strong></p>
 
 <table><thead>
 <tr>
-<th>Error Code</th>
-<th>Meaning</th>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
-<td>400</td>
-<td>Bad Request -- Your request is invalid.</td>
-</tr>
-<tr>
-<td>401</td>
-<td>Unauthorized -- Your API key is wrong.</td>
-</tr>
-<tr>
-<td>403</td>
-<td>Forbidden -- The kitten requested is hidden for administrators only.</td>
-</tr>
-<tr>
-<td>404</td>
-<td>Not Found -- The specified kitten could not be found.</td>
-</tr>
-<tr>
-<td>405</td>
-<td>Method Not Allowed -- You tried to access a kitten with an invalid method.</td>
-</tr>
-<tr>
-<td>406</td>
-<td>Not Acceptable -- You requested a format that isn&#39;t json.</td>
-</tr>
-<tr>
-<td>410</td>
-<td>Gone -- The kitten requested has been removed from our servers.</td>
-</tr>
-<tr>
-<td>418</td>
-<td>I&#39;m a teapot.</td>
-</tr>
-<tr>
-<td>429</td>
-<td>Too Many Requests -- You&#39;re requesting too many kittens! Slow down!</td>
-</tr>
-<tr>
-<td>500</td>
-<td>Internal Server Error -- We had a problem with our server. Try again later.</td>
-</tr>
-<tr>
-<td>503</td>
-<td>Service Unavailable -- We&#39;re temporarily offline for maintenance. Please try again later.</td>
+<td>requestData</td>
+<td>string</td>
+<td>request data bytes</td>
 </tr>
 </tbody></table>
 

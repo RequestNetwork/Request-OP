@@ -21,9 +21,7 @@
               <button disableRipple mat-icon-button (click)="sidenav.toggle()">
                 <i class="fa fa-bars fa-2x" aria-hidden="true"></i>
               </button>￼
-            </ng-container>
-            <ng-template #menuTemplate>
-              <a routerLink="/" class="d-flex align-items-center">
+              <div class="d-flex align-items-center">
                 <div class="request-logo mr-4">
                   <img class="img-fluid" src="assets/request-logo.png">
                 </div>
@@ -31,7 +29,18 @@
                   <div class="name">Payments</div>
                   <div class="powered-by">powered by Request Network</div>
                 </div>
-              </a>
+              </div>
+            </ng-container>
+            <ng-template #menuTemplate>
+              <div class="d-flex align-items-center">
+                <div class="request-logo mr-4">
+                  <img class="img-fluid" src="assets/request-logo.png">
+                </div>
+                <div class="product-name">
+                  <div class="name">Payments</div>
+                  <div class="powered-by">powered by Request Network</div>
+                </div>
+              </div>
               <div class="d-flex justify-content-between align-items-center menu">
                 <ng-container *ngTemplateOutlet="menuLinks"></ng-container>
               </div>
