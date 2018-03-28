@@ -34,15 +34,18 @@
       </table>
     </div>
     <div class="pull-right">
-      <button mat-raised-button color="primary" class="pay-button" (click)="payWithEth()">
+      <button mat-raised-button color="primary" class="pay-button" (click)="payWithEth()" [style.minWidth]="'200px'">
         <div class="d-flex align-items-center" style="height: 60px;">
-          <img src="assets/request-logo.png" [style.height]="'30px'">
-          <div class="h-100 px-3">
-            <div style="border: none; border-left:1px solid #334F6D;height:100%"></div>
-          </div>
-          <span>Pay with&nbsp;</span>
-          <img [style.height]="'20px'" src="assets/eth-logo-white.png">
-          <span>&nbsp;ETH</span>
+          <i *ngIf="loading; else payTemplate" class="fa fa-2x fa-circle-o-notch fa-spin mx-auto"></i>
+          <ng-template #payTemplate>
+            <img src="assets/request-logo.png" [style.height]="'30px'">
+            <div class="h-100 px-3">
+              <div style="border: none; border-left:1px solid #334F6D;height:100%"></div>
+            </div>
+            <span>Pay with&nbsp;</span>
+            <img [style.height]="'20px'" src="assets/eth-logo-white.png">
+            <span>&nbsp;ETH</span>
+          </ng-template>
         </div>
       </button>
     </div>

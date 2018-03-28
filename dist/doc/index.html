@@ -225,9 +225,6 @@
             <a href="#introduction" class="toc-h1 toc-link" data-title="introduction">Introduction</a>
           </li>
           <li>
-            <a href="#how-it-works" class="toc-h1 toc-link" data-title="how-it-works">How It Works</a>
-          </li>
-          <li>
             <a href="#getting-started" class="toc-h1 toc-link" data-title="getting-started">Getting Started</a>
               <ul class="toc-list-h2">
                   <li>
@@ -242,16 +239,24 @@
             <a href="#signing-a-request" class="toc-h1 toc-link" data-title="signing-a-request">Signing a request</a>
           </li>
           <li>
-            <a href="#using-the-request-network-39-s-gateway" class="toc-h1 toc-link" data-title="using-the-request-network-s-gateway">Using the Request Network's gateway</a>
+            <a href="#using-request-network-39-s-gateway" class="toc-h1 toc-link" data-title="using-request-network-s-gateway">Using Request Network's gateway</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#redirecting-to-https-app-request-network" class="toc-h2 toc-link" data-title="redirecting-to-https-app-request-network">redirecting to https://app.request.network</a>
+                    <a href="#redirecting-to-gateway" class="toc-h2 toc-link" data-title="redirecting-to-gateway">Redirecting to gateway</a>
                   </li>
                   <li>
-                    <a href="#get-a-specific-kitten" class="toc-h2 toc-link" data-title="get-a-specific-kitten">Get a Specific Kitten</a>
+                    <a href="#paying-on-the-gateway" class="toc-h2 toc-link" data-title="paying-on-the-gateway">Paying on the gateway</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#verifying-txhash-information" class="toc-h1 toc-link" data-title="verifying-txhash-information">Verifying txHash information</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#getting-request-by-txhash" class="toc-h2 toc-link" data-title="getting-request-by-txhash">Getting request by txHash</a>
                   </li>
                   <li>
-                    <a href="#delete-a-specific-kitten" class="toc-h2 toc-link" data-title="delete-a-specific-kitten">Delete a Specific Kitten</a>
+                    <a href="#verifying-transaction-data" class="toc-h2 toc-link" data-title="verifying-transaction-data">Verifying transaction data</a>
                   </li>
               </ul>
           </li>
@@ -270,12 +275,15 @@
 <p>Welcome to Request Network documentation for developers! Here is a guide on how to integrate a &quot;pay-with-request&quot; button for your website using request-network.js library.</p>
 
 <p>For more information on how to use request-network.js library, please visit our <a href="https://github.com/RequestNetwork/requestNetwork/tree/master/packages/requestNetwork.js">github repository</a></p>
-<h1 id='how-it-works'>How It Works</h1>
-<p>The principle is to 
-Backend serve because uses private key and sensible data</p>
+
+<!-- # How It Works
+
+The principle is to 
+Backend serve because uses private key and sensible data
+ -->
 <h1 id='getting-started'>Getting Started</h1><h2 id='dependencies'>Dependencies</h2>
 <blockquote>
-<p>import the libraries in your backend:</p>
+<p>Import the libraries in your backend:</p>
 </blockquote>
 <pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">RequestNetwork</span> <span class="o">=</span> <span class="nx">require</span> <span class="p">(</span><span class="s1">'@requestnetwork/request-network.js'</span><span class="p">);</span>
 
@@ -289,7 +297,7 @@ Backend serve because uses private key and sensible data</p>
 <code>npm install truffle-hdwallet-provider</code></p>
 <h2 id='instanciate-request-network-js'>Instanciate request-network.js</h2>
 <blockquote>
-<p>example for creating a requestnetwork instance with HDWalletProvider on rinkeby testnet</p>
+<p>Example for creating a requestnetwork instance with HDWalletProvider on rinkeby testnet</p>
 </blockquote>
 <pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">mnemonic</span> <span class="o">=</span> <span class="s1">'twelve word mnemonic phrase of the wallet used for signing the requests'</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">provider</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">HDWalletProvider</span><span class="p">(</span><span class="nx">mnemonic</span><span class="p">,</span> <span class="s1">'https://rinkeby.infura.io/'</span><span class="p">);</span>
@@ -355,7 +363,7 @@ Web3 library is a collection of modules which contain specific functionality for
 </tbody></table>
 <h1 id='signing-a-request'>Signing a request</h1>
 <blockquote>
-<p>example:</p>
+<p>Example:</p>
 </blockquote>
 <pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">requestData</span> <span class="o">=</span> <span class="p">{</span> <span class="na">reason</span><span class="p">:</span> <span class="s1">'Order #030890 from Just Another Shop'</span><span class="p">,</span>
                     <span class="na">orderId</span><span class="p">:</span> <span class="s1">'030890'</span> <span class="p">}</span>
@@ -363,7 +371,7 @@ Web3 library is a collection of modules which contain specific functionality for
 <span class="kd">var</span> <span class="nx">signedRequest</span> <span class="o">=</span> <span class="nx">await</span> <span class="nx">requestnetwork</span><span class="p">.</span><span class="nx">requestEthereumService</span><span class="p">.</span><span class="nx">signRequestAsPayee</span><span class="p">(</span>
           <span class="p">[</span><span class="s1">'0x8F0255e24B99825e9AD4bb7506678F18C630453F'</span><span class="p">],</span>
           <span class="p">[</span><span class="s1">'175000000000000000'</span><span class="p">],</span>
-          <span class="k">new</span> <span class="nb">Date</span><span class="p">().</span><span class="nx">getTime</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1000</span> <span class="o">*</span> <span class="mi">60</span> <span class="o">*</span> <span class="mi">60</span><span class="p">,</span> <span class="c1">// 1 hour validity</span>
+          <span class="k">new</span> <span class="nb">Date</span><span class="p">().</span><span class="nx">getTime</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1000</span> <span class="o">*</span> <span class="mi">60</span> <span class="o">*</span> <span class="mi">60</span><span class="p">,</span> <span class="c1">// we put expiration after 1 hour here</span>
           <span class="p">[</span><span class="s1">'0xf9DF490146b29418a59F43dDb4Afc57Cd3fEf856'</span><span class="p">],</span>
           <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">requestData</span><span class="p">),</span>
         <span class="p">);</span>
@@ -377,15 +385,15 @@ Web3 library is a collection of modules which contain specific functionality for
   </span><span class="s2">"expectedAmounts"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="s2">"175000000000000000"</span><span class="w">
   </span><span class="p">],</span><span class="w">
-  </span><span class="s2">"expirationDate"</span><span class="p">:</span><span class="w"> </span><span class="mi">1521611830571</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"hash"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0x2b70cfdd7737c9dfbcd00dac9b492f49d9f46110d009f8755ddd2533a8a9c9a4"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"expirationDate"</span><span class="p">:</span><span class="w"> </span><span class="mi">1522207081496</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"hash"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0x0071762fae039b38da6c0685172c2de8df98eed1cbfc7b709bbe23df51c16fb3"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"payeesIdAddress"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="s2">"0x8F0255e24B99825e9AD4bb7506678F18C630453F"</span><span class="w">
   </span><span class="p">],</span><span class="w">
   </span><span class="s2">"payeesPaymentAddress"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="s2">"0xf9DF490146b29418a59F43dDb4Afc57Cd3fEf856"</span><span class="w">
   </span><span class="p">],</span><span class="w">
-  </span><span class="s2">"signature"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0xb3de3102398fc7fd8a51701178ce83c6925719778c2c2fd62eae6fbe20cb98e74e0c371762483a9e3ebb096119c1524205bf353faef1a758d5644ad36a36d1291b"</span><span class="w">
+  </span><span class="s2">"signature"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0x4708d801416d8ee4604af4bf8b3a2328592ab450d6a48c0d66446e26b51066cb2d2c568d37c38ae1bc3b48f1582e24b9c8b63bac9c548d8754f5d50b33e5fb491c"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p><strong><code>async requestnetwork.requestEthereumService.signRequestAsPayee(payeesIdAddress, expectedAmounts, expirationDate, payeesPaymentAddress, data)</code></strong></p>
@@ -427,150 +435,130 @@ Web3 library is a collection of modules which contain specific functionality for
 <aside class="notice">
 Signing a request costs no fee, as the request is not broadcasted on the blockchain until the payer accepts and pays it.
 </aside>
-<h1 id='using-the-request-network-39-s-gateway'>Using the Request Network&#39;s gateway</h1>
+<h1 id='using-request-network-39-s-gateway'>Using Request Network&#39;s gateway</h1>
 <p>In order to ease the process for integrating a pay-with-request button on your website, the request app provides a gateway for displaying the info of a signed request and allowing someone to pay it.</p>
-<h2 id='redirecting-to-https-app-request-network'>redirecting to https://app.request.network</h2>
-<p>gateway address is https://app.request.network/#/pay-with-request?data</p>
-<pre class="highlight javascript tab-javascript"><code><span class="nb">document</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">href</span> <span class="o">=</span> <span class="err">'</span><span class="nx">https</span><span class="p">:</span><span class="c1">//app.request.network/#/pay-with-request?data=${encodeURIComponent(JSON.stringify({signedRequest: res, callbackUrl: this.callbackUrl}))}`;</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
+<h2 id='redirecting-to-gateway'>Redirecting to gateway</h2>
+<blockquote>
+<p>Example:</p>
+</blockquote>
+<pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="nb">encodeURIComponent</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span><span class="na">signedRequest</span><span class="p">:</span> <span class="nx">signedRequest</span><span class="p">,</span> <span class="na">callbackUrl</span><span class="p">:</span> <span class="nx">myCallbackUrl</span><span class="p">}))};</span>
+<span class="nb">document</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">href</span> <span class="o">=</span> <span class="s1">'https://app.request.network/#/pay-with-request/'</span> <span class="o">+</span> <span class="nx">data</span><span class="p">;</span>
+</code></pre>
+<p>The gateway url is <code>https://app.request.network/#/pay-with-request/&lt;data&gt;</code></p>
 
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
-</code></pre><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://example.com/api/kittens"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'kittn'</span><span class="p">);</span>
+<p>where data is a string of a JSON object containing the following <strong>mandatory</strong> parameters</p>
 
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">);</span>
-<span class="kd">let</span> <span class="nx">kittens</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">kittens</span><span class="p">.</span><span class="nx">get</span><span class="p">();</span>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>signedRequest</td>
+<td>object</td>
+<td>signed request object (see paragraph above for format)</td>
+</tr>
+<tr>
+<td>callbackUrl</td>
+<td>string</td>
+<td>url for the gateway to redirect after request has been paid</td>
+</tr>
+</tbody></table>
+<h2 id='paying-on-the-gateway'>Paying on the gateway</h2>
+<p>You can find an example of how a signed request looks like on the gateway on this <a href="https://app.request.network/#/pay-with-request/%7B%22signedRequest%22%3A%7B%22currencyContract%22%3A%220xafa312973909c3a541665e11c883a24a8eb10b2c%22%2C%22data%22%3A%22QmSsrdAPhD5UkRVDKVpCwf63nrUxBaNbYmpZ2njbku9Mi5%22%2C%22expectedAmounts%22%3A%5B%22175000000000000000%22%5D%2C%22expirationDate%22%3A1522207606766%2C%22hash%22%3A%220xb7bd2cd4fe422285c800d67901bc1e9ae2dbe43f72582a414e75a4500d8e0236%22%2C%22payeesIdAddress%22%3A%5B%220x8F0255e24B99825e9AD4bb7506678F18C630453F%22%5D%2C%22payeesPaymentAddress%22%3A%5B%220xf9DF490146b29418a59F43dDb4Afc57Cd3fEf856%22%5D%2C%22signature%22%3A%220x1bfbc84ff14364623f64ea46495174050eac773e30963039277d5d84730b1376048349585db51d3e1d20e5928bd0b514b298e1daae275caf294f17d20b52dad81c%22%7D%2C%22callbackUrl%22%3A%22http%3A%2F%2Flocalhost%3A4200%2F%23%2Fconfirm%2F%22%7D">link</a></p>
+
+<p>On the gateway, the payer connects to his ether wallet and pays the request.</p>
+
+<p>Once the payment transaction is broadcasted, the gateway redirect to the <strong>callbackUrl</strong> concatenated with string of the transaction hash.</p>
+
+<p>Example:</p>
+
+<p><code>https://myCallbackUrl/0xb8e90ba15bb09d1b5baba628fcc01d0302d8d47dc854e85e6deeb5c60f6d3f2b</code></p>
+
+<p>Otherwise, if the payer click on &#39;cancel &amp; go back to merchant&#39;, the gateway will redirect to the <strong>callbackUrl</strong> concatenated with the signed request json object stringified.</p>
+<h1 id='verifying-txhash-information'>Verifying txHash information</h1>
+<p>One can retrieve all the information of a transaction with only its tx hash. This allows the payer to have a seemless payment experience.</p>
+<h2 id='getting-request-by-txhash'>Getting request by txHash</h2>
+<blockquote>
+<p>Example:</p>
+</blockquote>
+<pre class="highlight javascript tab-javascript"><code> <span class="k">try</span> <span class="p">{</span>
+      <span class="kd">var</span> <span class="nx">txHash</span> <span class="o">=</span> <span class="mh">0xb8e90ba15bb09d1b5baba628fcc01d0302d8d47dc854e85e6deeb5c60f6d3f2b</span><span class="p">;</span>
+      <span class="kd">var</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">await</span> <span class="nx">requestnetwork</span><span class="p">.</span><span class="nx">requestCoreService</span><span class="p">.</span><span class="nx">getRequestByTransactionHash</span><span class="p">(</span><span class="nx">txHash</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
 </code></pre>
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
-<pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Fluffums"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"calico"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Max"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unknown"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"transaction"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"blockHash"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0x0000000000000000000000000000000000000000000000000000000000000000"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"blockNumber"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"from"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0x1AA3fFefeaeC333f9BF76b705547D08c90cC1280"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"gas"</span><span class="p">:</span><span class="w"> </span><span class="mi">287504</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"gasPrice"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1000000000"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"hash"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0x8083f504e6f515a5c98debcbd54fd1c98c86d9eff7098d1b701e8eacbe5856e8"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"input"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0x9dbdd85c00000000000000000000000000000000000000000000000000000000000000c0000000000000000000000000000000000000000000000000000000000000018000000000000000000000000000000000000000000000000000000000000001c00000000000000000000000000000000000000000000000000000000000000200000000000000000000000000000000000000000000000000000001626ac2d6390000000000000000000000000000000000000000000000000000000000000220000000000000000000000000000000000000000000000000000000000000008c8f0255e24b99825e9ad4bb7506678f18c630453f0000000000000000000000000000000000000000018f0255e24b99825e9ad4bb7506678f18c630453f000000000000000000000000000000000000000000000000026db992a3b180002e516d537372644150684435556b5256444b567043776636336e72557842614e62596d705a326e6a626b75394d693500000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001000000000000000000000000f9df490146b29418a59f43ddb4afc57cd3fef8560000000000000000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000000000026db992a3b180000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000004156d628e48ead956625124627ad2dafb4d51a9e913339038de8aeefd1b017fc921917a2c9d73e94d8836a757ac7722588063b907c14834f069627bf36a6ca0ef61b00000000000000000000000000000000000000000000000000000000000000"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"nonce"</span><span class="p">:</span><span class="w"> </span><span class="mi">79</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"to"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0xAFA312973909C3a541665e11C883a24a8eb10b2C"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"transactionIndex"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"175000000000000000"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"v"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0x2c"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"r"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0xbaf3e6351bd41581f3557a0baef9f63eaee184327b2f698a1b7697f70f9006fe"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"s"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0x664b8f600a6ce7b0806780dfcc657e84dd281d2896289eaf11da9daf303e1640"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"method"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"broadcastSignedRequestAsPayer"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"parameters"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"0"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0x8f0255e24b99825e9ad4bb7506678f18c630453f0000000000000000000000000000000000000000018f0255e24b99825e9ad4bb7506678f18c630453f000000000000000000000000000000000000000000000000026db992a3b180002e516d537372644150684435556b5256444b567043776636336e72557842614e62596d705a326e6a626b75394d6935"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"1"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="s2">"0xf9DF490146b29418a59F43dDb4Afc57Cd3fEf856"</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="s2">"2"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="s2">"175000000000000000"</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="s2">"3"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+        </span><span class="s2">"4"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1522209576505"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"5"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0x56d628e48ead956625124627ad2dafb4d51a9e913339038de8aeefd1b017fc921917a2c9d73e94d8836a757ac7722588063b907c14834f069627bf36a6ca0ef61b"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"__length__"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"_requestData"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0x8f0255e24b99825e9ad4bb7506678f18c630453f0000000000000000000000000000000000000000018f0255e24b99825e9ad4bb7506678f18c630453f000000000000000000000000000000000000000000000000026db992a3b180002e516d537372644150684435556b5256444b567043776636336e72557842614e62596d705a326e6a626b75394d6935"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"_payeesPaymentAddress"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="s2">"0xf9DF490146b29418a59F43dDb4Afc57Cd3fEf856"</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="s2">"_payeeAmounts"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="s2">"175000000000000000"</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="s2">"_additionals"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+        </span><span class="s2">"_expirationDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1522209576505"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"_signature"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0x56d628e48ead956625124627ad2dafb4d51a9e913339038de8aeefd1b017fc921917a2c9d73e94d8836a757ac7722588063b907c14834f069627bf36a6ca0ef61b"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
-</span><span class="p">]</span><span class="w">
-</span></code></pre>
-<p>This endpoint retrieves all kittens.</p>
-<h3 id='http-request'>HTTP Request</h3>
-<p><code>GET http://example.com/api/kittens</code></p>
-<h3 id='query-parameters'>Query Parameters</h3>
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Default</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>include_cats</td>
-<td>false</td>
-<td>If set to true, the result will also include cats.</td>
-</tr>
-<tr>
-<td>available</td>
-<td>true</td>
-<td>If set to false, the result will include kittens that have already been adopted.</td>
-</tr>
-</tbody></table>
-
-<aside class="success">
-Remember — a happy kitten is an authenticated kitten!
-</aside>
-<h2 id='get-a-specific-kitten'>Get a Specific Kitten</h2><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://example.com/api/kittens/2"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'kittn'</span><span class="p">);</span>
-
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">);</span>
-<span class="kd">let</span> <span class="nx">max</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">kittens</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
-</code></pre>
-<blockquote>
-<p>The above command returns JSON structured like this:</p>
-</blockquote>
-<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Max"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unknown"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>This endpoint retrieves a specific kitten.</p>
+<p><strong><code>async requestnetwork.requestCoreService.getRequestByTransactionHash(txHash)</code></strong></p>
 
-<aside class="warning">Inside HTML code blocks like this one, you can't use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside>
-<h3 id='http-request-2'>HTTP Request</h3>
-<p><code>GET http://example.com/kittens/&lt;ID&gt;</code></p>
-<h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
+<th>Type</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
-<td>ID</td>
-<td>The ID of the kitten to retrieve</td>
+<td>txHash</td>
+<td>string</td>
+<td>hash of the ethereum transaction</td>
 </tr>
 </tbody></table>
-<h2 id='delete-a-specific-kitten'>Delete a Specific Kitten</h2><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
+<h2 id='verifying-transaction-data'>Verifying transaction data</h2>
+<p>You&#39;ll then have to carry out a series of tests in order to verify the transaction does match a request you signed.</p>
 
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">delete</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://example.com/api/kittens/2"</span>
-  -X DELETE
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'kittn'</span><span class="p">);</span>
-
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">);</span>
-<span class="kd">let</span> <span class="nx">max</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">kittens</span><span class="p">.</span><span class="k">delete</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
-</code></pre>
-<blockquote>
-<p>The above command returns JSON structured like this:</p>
-</blockquote>
-<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"deleted"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">":("</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-<p>This endpoint deletes a specific kitten.</p>
-<h3 id='http-request-3'>HTTP Request</h3>
-<p><code>DELETE http://example.com/kittens/&lt;ID&gt;</code></p>
-<h3 id='url-parameters-2'>URL Parameters</h3>
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>ID</td>
-<td>The ID of the kitten to delete</td>
-</tr>
-</tbody></table>
+<p>first condition to check is that the transaction method name is <code>broadcastSignedRequestAsPayer</code></p>
 <h1 id='errors'>Errors</h1>
 <aside class="notice">
 This error section is stored in a separate file in <code>includes/_errors.md</code>. Slate allows you to optionally separate out your docs into many files...just save them to the <code>includes</code> folder and add them to the top of your <code>index.md</code>'s frontmatter. Files are included in the order listed.

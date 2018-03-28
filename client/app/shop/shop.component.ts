@@ -1,6 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { RequestService } from '../services/request.service';
-import { environment } from  '../../environments/environment'
+import { environment } from '../../environments/environment'
 
 import { DOCUMENT } from '@angular/platform-browser';
 
@@ -18,6 +18,8 @@ export class ShopComponent {
 
   orderId = '030890';
   gatewayUrl = environment.gatewayUrl;
+
+  loading = true;
   callbackUrl: string;
 
   constructor(@Inject(DOCUMENT) private document: any, private requestService: RequestService) {
@@ -34,6 +36,7 @@ export class ShopComponent {
 
   payWithEth() {
     console.log('click on pay with ETH');
+    this.loading = true;
     this.requestService.signRequest({ orderId: this.orderId }).subscribe(
       res => {
         if (res.signature) {
