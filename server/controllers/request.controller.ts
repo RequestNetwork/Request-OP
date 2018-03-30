@@ -8,7 +8,7 @@ export default class RequestCtrl {
 
   private web3;
   private rn;
-  private infuraNodeUrl = 'https://rinkeby.infura.io/';
+  private infuraNodeUrl = 'https://rinkeby.infura.io/BQBjfSi5EKSCQQpXebO';
   private payeeIdAddress = '0x8F0255e24B99825e9AD4bb7506678F18C630453F';
   private payeePaymentAddress = '0xf9DF490146b29418a59F43dDb4Afc57Cd3fEf856';
 
