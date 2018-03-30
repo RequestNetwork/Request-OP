@@ -196,6 +196,13 @@ section.help-section {
 section.up-to-date-section {
   background: $light-grey-op;
   color: $blue-op;
+  input.sign-up {
+    border: 1px solid #EFEFEF;
+    border-radius: 5px;
+    max-width: 380px;
+    margin-right: 2rem;
+    padding: 1rem;
+  }
 }
 
 section.footer-section {

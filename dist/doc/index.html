@@ -250,7 +250,7 @@
               </ul>
           </li>
           <li>
-            <a href="#verifying-txhash-information" class="toc-h1 toc-link" data-title="verifying-txhash-information">Verifying txHash information</a>
+            <a href="#verifying-transaction-information" class="toc-h1 toc-link" data-title="verifying-transaction-information">Verifying transaction information</a>
               <ul class="toc-list-h2">
                   <li>
                     <a href="#getting-transaction-data" class="toc-h2 toc-link" data-title="getting-transaction-data">Getting transaction data</a>
@@ -259,6 +259,9 @@
                     <a href="#getting-request-data" class="toc-h2 toc-link" data-title="getting-request-data">Getting request data</a>
                   </li>
               </ul>
+          </li>
+          <li>
+            <a href="#getting-request" class="toc-h1 toc-link" data-title="getting-request">Getting request</a>
           </li>
       </div>
         <ul class="toc-footer">
@@ -308,7 +311,7 @@ Backend serve because uses private key and sensible data
 <p>request-network.js needs a Web3 provider to sign requests.
 Web3 library is a collection of modules which contain specific functionality for the ethereum ecosystem.</p>
 
-<p>In this guide we use <strong>truffle-hdwallet-provider</strong> which instanciate a Web3 provider to sign transactions for addresses derived from a 12-word mnemonic phrase.</p>
+<p>In this guide we use <strong>truffle-hdwallet-provider</strong> which instanciates a Web3 provider to sign transactions for addresses derived from a 12-word mnemonic phrase.</p>
 
 <p><strong><code>new HDWalletProvider(mnemonic, provider_uri, index)</code></strong></p>
 
@@ -479,7 +482,7 @@ Signing a request costs no fee, as the request is not broadcasted on the blockch
 <aside class="success">
 Your signature ensure that only the information you signed can be broadcasted on ethereum's blockchain
 </aside>
-<h1 id='verifying-txhash-information'>Verifying txHash information</h1>
+<h1 id='verifying-transaction-information'>Verifying transaction information</h1>
 <p>One can retrieve all the information of a transaction with only its tx hash. This allows the payer to have a seemless payment experience.</p>
 
 <p>Merchant will then have to carry out a series of tests in order to verify the transaction does match a request you signed.</p>
@@ -561,10 +564,10 @@ Your signature ensure that only the information you signed can be broadcasted on
 </tr>
 </tbody></table>
 
-<p>first condition to check is that the <code>transaction.method.name == &#39;broadcastSignedRequestAsPayer&#39;</code></p>
+<p>first condition to check is that <code>transaction.method.name == &#39;broadcastSignedRequestAsPayer&#39;</code></p>
 
 <aside class="notice">
-From that point if you stored the signed request information on a database, you can just need to verify `transaction.method.parameters._signature` matches a known signature
+From that point if you stored the signed request information on a database, you just need to verify `transaction.method.parameters._signature` matches a known signature
 And then verify the amount 
 </aside>
 <h2 id='getting-request-data'>Getting request data</h2>
@@ -604,7 +607,7 @@ And then verify the amount
 <td>request data bytes</td>
 </tr>
 </tbody></table>
-
+<h1 id='getting-request'>Getting request</h1>
       </div>
       <div class="dark-box">
           <div class="lang-selector">
