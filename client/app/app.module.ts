@@ -10,12 +10,12 @@ import { ShopComponent } from './shop/shop.component';
 import { ConfirmComponent } from './confirm/confirm.component';
 import { HomeComponent } from './home/home.component';
 
-import { RunKitEmbedComponent } from 'angular-runkit'
+// import { RunKitEmbedComponent } from 'angular-runkit'
 
 
 @NgModule({
   declarations: [
-    RunKitEmbedComponent,
+    // RunKitEmbedComponent,
     AppComponent,
     ShopComponent,
     ConfirmComponent,
