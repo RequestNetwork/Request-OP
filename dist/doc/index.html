@@ -258,10 +258,10 @@
                   <li>
                     <a href="#reconcile-the-payment-with-your-own-system" class="toc-h2 toc-link" data-title="reconcile-the-payment-with-your-own-system">Reconcile the payment with your own system</a>
                   </li>
+                  <li>
+                    <a href="#extras" class="toc-h2 toc-link" data-title="extras">Extras</a>
+                  </li>
               </ul>
-          </li>
-          <li>
-            <a href="#getting-request" class="toc-h1 toc-link" data-title="getting-request">Getting request</a>
           </li>
       </div>
         <ul class="toc-footer">
@@ -282,8 +282,10 @@
 
 <p><strong>Plugins:</strong></p>
 
-<p>Shopify: No plugin available yet
-WooCommerce: Plugin currently being developed (https://wooreq.com/)</p>
+<ul>
+<li>Shopify: No plugin available yet</li>
+<li>WooCommerce: Plugin currently being developed (<a href="https://wooreq.com/">https://wooreq.com/</a>)</li>
+</ul>
 
 <p><strong>Steps to integrate Request Network:</strong></p>
 
@@ -296,10 +298,10 @@ WooCommerce: Plugin currently being developed (https://wooreq.com/)</p>
 
 <p>It can be done in under 30 lines of code for a quick integration and can also be customized more if you wish to synchronize the orders with your own system.</p>
 
-<p>A full example of calling Request is available on <a href="https://github.com/RequestNetwork/requestNetwork/tree/master/packages/requestNetwork.js">this Github</a>.</p>
+<p>A full example of calling Request is available on <a href="https://github.com/RequestNetwork/Request-OP">this Github</a>.</p>
 <h1 id='preconfiguration'>Preconfiguration</h1><h2 id='create-a-wallet-to-store-your-currencies'>Create a wallet to store your currencies</h2>
-<p><em>If you already have your wallets set up, you can skip this part and go <a href="#integrating-request-network">here</a>.</em></p>
-<h3 id='a-ether-eth'>a. Ether (ETH)</h3>
+<p><em>If you already have your wallets set up, you can skip this part and go <a href="#create-an-account-to-store-your-identity">here</a>.</em></p>
+<h3 id='ether-eth'>Ether (ETH)</h3>
 <p>You need to prepare a wallet to receive the ethers.</p>
 
 <p>An ether address looks like this: 0xdD76B55ee6dAfe0c7c978bff69206d476a5b9Ce7 </p>
@@ -318,15 +320,16 @@ WooCommerce: Plugin currently being developed (https://wooreq.com/)</p>
 <p>You need to generate a 12 words mnemonic seed, then store it somewhere safe. We recommend:</p>
 
 <ul>
-<li>https://iancoleman.io/bip39/</li>
+<li><a href="https://iancoleman.io/bip39/">https://iancoleman.io/bip39/</a></li>
 <li><a href="https://metamask.io/">Metamask</a></li>
 <li><a href="https://www.ledgerwallet.com/">Ledger</a> Wallet (using a 12 words seed)</li>
 </ul>
 
 <p>If someone accesses your mnemonic seed, he won’t be able to access the money you received on the other account. However he will be able to generate Requests in your name. Consider these words as a very important password.</p>
 <h1 id='integrating-request-network'>Integrating Request Network</h1>
-<p><img src="images/flow-diagram.png" alt="Developer view of the flow" />
----------<em>Developer view of the flow</em>---------</p>
+<p>The developer view of the flow can be seen in the picture above:</p>
+
+<p><img src="images/flow-diagram.png" alt="Developer view of the flow" /></p>
 <h2 id='1-create-a-request-for-payment-on-your-back-end'>1. Create a request for payment on your back-end</h2><h3 id='a-add-dependencies-and-instantiate-request-network'>a. Add dependencies and instantiate Request Network</h3>
 <blockquote>
 <p>On your backend, import the libraries:</p>
@@ -462,7 +465,7 @@ Web3 library is a collection of modules which contain specific functionality for
 <tr>
 <td>payeesIdAddress</td>
 <td>string[]</td>
-<td>ID addresses of the payees (<a href="#create-an-account-to-store-your-identity">see step in Preconfiguration</a>). Additional payees can be added in the array. Position 0 is the main payee (the one who sign the request).</td>
+<td>ID address of the payee (<a href="#create-an-account-to-store-your-identity">see step in Preconfiguration</a>). Additional payees can be added in the array. Position 0 is the main payee (the one who sign the request).</td>
 </tr>
 <tr>
 <td>expectedAmounts</td>
@@ -472,7 +475,7 @@ Web3 library is a collection of modules which contain specific functionality for
 <tr>
 <td>expirationDate</td>
 <td>number</td>
-<td>Timestamp in seconds of the date after which the signed request can not be paid anymore. We recommend to set: 3600</td>
+<td>Timestamp in seconds of the date after which the signed request can not be paid anymore. We recommend to set:  <code>new Date().getTime() + 3600</code></td>
 </tr>
 <tr>
 <td>payeesPaymentAddress</td>
@@ -493,15 +496,15 @@ Web3 library is a collection of modules which contain specific functionality for
 <p>Accounting: Accounting standardized data will be specified during the first beta phase.</p>
 
 <p>We use the following format <code>metadata = { reason: String, orderId: String }</code></p>
-<h2 id='2-add-a-payment-button-on-your-front-end-and-redirect-the-user-to-the-gateway'>2. Add a payment button on your front-end and redirect the user to the gateway</h2><h3 id='a-adding-the-button-to-your-website'>a. Adding the button to your website</h3>
+<h2 id='2-add-a-payment-button-on-your-front-end-and-redirect-the-user-to-the-gateway'>2. Add a payment button on your front-end and redirect the user to the gateway</h2>
 <blockquote>
-<p>Example of Html and css code for styling a “pay-with ETH” button:</p>
+<p>Example of Html and css code for styling a “pay with ETH” button:</p>
 </blockquote>
 <pre class="highlight html tab-html"><code><span class="nt">&lt;button</span> <span class="na">class=</span><span class="s">"pay-with-button"</span><span class="nt">&gt;</span>
-  <span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">"request-logo.png"</span> <span class="na">style=</span><span class="s">"height: 30px;"</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;span&gt;</span>Pay with<span class="ni">&amp;nbsp;</span><span class="nt">&lt;/span&gt;</span>
-    <span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">"eth-logo-white.png"</span> <span class="na">style=</span><span class="s">"height: 20px;"</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;span</span> <span class="na">_ngcontent-c1=</span><span class="s">""</span><span class="nt">&gt;</span><span class="ni">&amp;nbsp;</span>ETH<span class="nt">&lt;/span&gt;</span>
+  <span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">"https://payments.request.network/assets/request-logo.png"</span> <span class="na">style=</span><span class="s">"height: 30px;"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;span&gt;</span>Pay with<span class="ni">&amp;nbsp;</span><span class="nt">&lt;/span&gt;</span>
+  <span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">"https://payments.request.network/assets/eth-logo-white.png"</span> <span class="na">style=</span><span class="s">"height: 20px;"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;span</span> <span class="na">_ngcontent-c1=</span><span class="s">""</span><span class="nt">&gt;</span><span class="ni">&amp;nbsp;</span>ETH<span class="nt">&lt;/span&gt;</span>
 <span class="nt">&lt;/button&gt;</span>
 
 </code></pre><pre class="highlight css tab-css"><code><span class="nt">pay-with-button</span> <span class="p">{</span> 
@@ -518,15 +521,15 @@ Web3 library is a collection of modules which contain specific functionality for
   <span class="nl">border-bottom</span><span class="p">:</span> <span class="m">3px</span> <span class="nb">solid</span> <span class="m">#6CFDCC</span><span class="p">;</span>
   <span class="nl">padding</span><span class="p">:</span> <span class="m">0</span> <span class="m">16px</span><span class="p">;</span>
 <span class="p">}</span>
-</code></pre>
+</code></pre><h3 id='a-adding-the-button-to-your-website'>a. Adding the button to your website</h3>
 <p><img src="images/button.png" alt="pay-with button" /></p>
 
-<p>See example code.</p>
+<p>See example code for styling a &quot;paywith ETH&quot; button.</p>
 <h3 id='b-redirect-to-the-gateway'>b.  Redirect to the gateway</h3>
 <p>In order to ease the process for integrating a pay-with-request button on your website, the request app provides a gateway for displaying the info of a signed request and allowing someone to pay it.</p>
 
 <blockquote>
-<p>Example:</p>
+<p>Example for redirectiong to the gateway with right parameters:</p>
 </blockquote>
 <pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="nb">encodeURIComponent</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span><span class="na">signedRequest</span><span class="p">:</span> <span class="nx">signedRequest</span><span class="p">,</span> <span class="na">callbackUrl</span><span class="p">:</span> <span class="nx">myCallbackUrl</span><span class="p">,</span> <span class="na">networkId</span><span class="p">:</span> <span class="mi">1</span><span class="p">}))};</span>
 <span class="nb">document</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">href</span> <span class="o">=</span> <span class="s1">'https://app.request.network/#/pay-with-request/'</span> <span class="o">+</span> <span class="nx">data</span><span class="p">;</span>
@@ -559,7 +562,7 @@ Web3 library is a collection of modules which contain specific functionality for
 </tr>
 </tbody></table>
 <h2 id='paying-on-the-gateway'>Paying on the gateway</h2>
-<p>You can find an example of how a signed request looks like on the gateway on this <a href="http://localhost:8080/#/pay-with-request/%7B%22signedRequest%22:%7B%22currencyContract%22:%220xd88ab9b1691340e04a5bbf78529c11d592d35f57%22,%22data%22:%22QmSsrdAPhD5UkRVDKVpCwf63nrUxBaNbYmpZ2njbku9Mi5%22,%22expectedAmounts%22:%5B%22175000000000000000%22%5D,%22expirationDate%22:1522398389692,%22hash%22:%220x4cfba8cc6ce1c0337afc1140a29fe47db5187d6eb0c1bd15c2a1269d2a3039e2%22,%22payeesIdAddress%22:%5B%220x8F0255e24B99825e9AD4bb7506678F18C630453F%22%5D,%22payeesPaymentAddress%22:%5B%220xf9DF490146b29418a59F43dDb4Afc57Cd3fEf856%22%5D,%22signature%22:%220x49814698dde9146727b37f166d5575314e5498651f895f0cf610669c2e03ff6c5bb9dd61e01b8e7d2d065722d215d0b18430559a5a95abea380284edf7f5371b1c%22%7D,%22callbackUrl%22:%22http:%2F%2Flocalhost:4200%2F%23%2Fconfirm%2F%22,%22networkId%22:4%7D">link</a></p>
+<p>You can find an example of how a signed request looks like on the gateway on this <a href="https://app.request.network/#/pay-with-request/%7B%22signedRequest%22:%7B%22currencyContract%22:%220xd88ab9b1691340e04a5bbf78529c11d592d35f57%22,%22data%22:%22QmSsrdAPhD5UkRVDKVpCwf63nrUxBaNbYmpZ2njbku9Mi5%22,%22expectedAmounts%22:%5B%22175000000000000000%22%5D,%22expirationDate%22:1522398389692,%22hash%22:%220x4cfba8cc6ce1c0337afc1140a29fe47db5187d6eb0c1bd15c2a1269d2a3039e2%22,%22payeesIdAddress%22:%5B%220x8F0255e24B99825e9AD4bb7506678F18C630453F%22%5D,%22payeesPaymentAddress%22:%5B%220xf9DF490146b29418a59F43dDb4Afc57Cd3fEf856%22%5D,%22signature%22:%220x49814698dde9146727b37f166d5575314e5498651f895f0cf610669c2e03ff6c5bb9dd61e01b8e7d2d065722d215d0b18430559a5a95abea380284edf7f5371b1c%22%7D,%22callbackUrl%22:%22http:%2F%2Flocalhost:4200%2F%23%2Fconfirm%2F%22,%22networkId%22:4%7D">link</a></p>
 
 <p>On the gateway, the payer connects to his ether wallet and pays the request.</p>
 
@@ -640,7 +643,9 @@ https://app.request.network/#/search/0x54B4B2d8E2ECcC99385B01bE13DFB473c7885286<
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre><h3 id='if-you-need-to-reconcile-the-payment-with-your-own-system-the-library-provides-a-method-for-getting-the-transaction-information-from-a-txhash'>If you need to reconcile the payment with your own system, the library provides a method for getting the transaction information from a txHash:</h3>
+</span></code></pre><h3 id='1-query-the-hash-received-during-the-callback-from-your-backend-to-know-which-order-it-is'>1. Query the hash received during the callback from your backend to know which order it is</h3>
+<p>If you need to reconcile the payment with your own system, the library provides a method for getting the transaction information from a txHash:</p>
+
 <p><strong><code>async requestnetwork.requestCoreService.getRequestByTransactionHash(txHash)</code></strong></p>
 
 <table><thead>
@@ -659,18 +664,19 @@ https://app.request.network/#/search/0x54B4B2d8E2ECcC99385B01bE13DFB473c7885286<
 
 <aside class="notice">
 Transaction information may not appear instantly after user paid the request and got redirected to the callbackUrl.
-Also you will have to get call **requestnetwork.requestCoreService.getRequestByTransactionHash(txHash)** until you receive a response with the transaction data.
+Also you will have to call the method getRequestByTransactionHash until you receive a response with the transaction data.
 </aside>
+<h3 id='2-compare-the-signature-to-verify-the-order-is-as-expected'>2. Compare the signature to verify the order is as expected</h3>
+<p>Once you receive the <strong>transaction</strong> object, you need to check some parameters to ensure it actually corresponds to the broadcast of a request payment transaction.</p>
 
-<p>Once you received the transaction information object, you need to check that <code>transaction.method.name == &#39;broadcastSignedRequestAsPayer&#39;</code></p>
+<ul>
+<li>First one is verifying the name of the method called is &quot;broadcastSignedRequestAsPayer&quot;:</li>
+</ul>
 
-<aside class="notice">
-From that point if you stored the signed request information on a database, you just need to verify `transaction.method.parameters._signature` matches a known signature
-And then verify the amount 
-</aside>
+<p><code>transaction.method.name == &#39;broadcastSignedRequestAsPayer&#39;</code></p>
 
 <blockquote>
-<p>Example:</p>
+<p>Example for getting additionnal info of the transaction:</p>
 </blockquote>
 <pre class="highlight javascript tab-javascript"><code><span class="nx">data</span> <span class="o">=</span> <span class="nx">requesnetwork</span><span class="p">.</span><span class="nx">requestCoreService</span><span class="p">.</span><span class="nx">parseBytesRequest</span><span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">transaction</span><span class="p">.</span><span class="nx">method</span><span class="p">.</span><span class="nx">parameters</span><span class="p">.</span><span class="nx">_requestData</span><span class="p">);</span>
 </code></pre>
@@ -687,7 +693,13 @@ And then verify the amount
   </span><span class="s2">"subPayees"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
   </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"QmSsrdAPhD5UkRVDKVpCwf63nrUxBaNbYmpZ2njbku9Mi5"</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre><h3 id='if-you-need-to-verify-additional-information-the-library-provides-a-method-for-getting-the-request-information-from-transaction-bytes'>If you need to verify additional information, the library provides a method for getting the request information from transaction bytes:</h3>
+</span></code></pre>
+<ul>
+<li>Second one is verifying that the amount paid matches the total amount of the request</li>
+</ul>
+
+<p>For that you need to call an additionnal method:</p>
+
 <p><strong><code>requestnetwork.requestCoreService.parseBytesRequest(requestData)</code></strong></p>
 
 <table><thead>
@@ -700,10 +712,34 @@ And then verify the amount
 <tr>
 <td>requestData</td>
 <td>string</td>
-<td>request data bytes</td>
+<td>request data bytes (variable found in transaction json object above <code>transaction.method.parameters._requestData</code>)</td>
 </tr>
 </tbody></table>
-<h1 id='getting-request'>Getting request</h1>
+
+<aside class="notice">
+From that point if you stored the signed request information on a database, you just need to verify that transaction.method.parameters._signature matches a known signature
+</aside>
+<h3 id='3-query-the-blockchain-until-the-payment-is-complete'>3. Query the blockchain until the payment is complete</h3>
+<p>You need to query getRequestByTransactionHash until you have a request object with and verify the payment is correct.</p>
+<h2 id='extras'>Extras</h2><h3 id='converting-currencies'>Converting currencies</h3>
+<p>A request has to be paid in the cryptocurrency it was created with for the moment. </p>
+
+<p>In the future, the request will be able to convert the currency automatically.</p>
+
+<p>If you would like to exchange cryptocurrency to fiat money, you will have to use one of the cryptocurrency exchange available in your country. </p>
+<h3 id='disputes-amp-fraud'>Disputes &amp; Fraud</h3>
+<p>There is no chargeback on the blockchain. To protect the user, automated escrow systems will be created and adding to this documentation in S2 2018.</p>
+<h3 id='recurring-payments-not-available-yet'>Recurring payments (not available yet)</h3><h3 id='creating-your-own-gateway'>Creating your own gateway</h3>
+<p>The Request Network Foundation is managing the app.request.network gateway. Anyone can create its own process or gateway to pay a request, by using the resources below.</p>
+
+<p>Resources:</p>
+
+<p>https://github.com/RequestNetwork/Request/wiki</p>
+
+<p>https://github.com/RequestNetwork/Requestnetwork</p>
+<h3 id='next-steps'>Next steps</h3>
+<p>A dashboard is under development and will simplify the merchant process.</p>
+
       </div>
       <div class="dark-box">
           <div class="lang-selector">
