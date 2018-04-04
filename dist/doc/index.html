@@ -334,7 +334,7 @@
 <blockquote>
 <p>On your backend, import the libraries:</p>
 </blockquote>
-<pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">RequestNetwork</span> <span class="o">=</span> <span class="nx">require</span> <span class="p">(</span><span class="s1">'@requestnetwork/request-network.js'</span><span class="p">);</span>
+<pre class="highlight javascript tab-javascript"><code><span class="kr">import</span> <span class="nx">RequestNetwork</span> <span class="nx">from</span> <span class="s1">'@requestnetwork/request-network.js'</span><span class="p">;</span>
 
 <span class="kd">var</span> <span class="nx">HDWalletProvider</span> <span class="o">=</span> <span class="nx">require</span> <span class="p">(</span><span class="s1">'truffle-hdwallet-provider'</span><span class="p">);</span>
 </code></pre>
@@ -356,9 +356,10 @@
 </blockquote>
 <pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">mnemonic</span> <span class="o">=</span> <span class="s1">'twelve word mnemonic phrase of the wallet used for signing the requests'</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">provider</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">HDWalletProvider</span><span class="p">(</span><span class="nx">mnemonic</span><span class="p">,</span> <span class="s1">'https://mainnet.infura.io/'</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">networkId</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="c1">// 1 is for Mainnet (4 for Rinkeby testnet, 99 for local rpc)</span>
 
 <span class="k">try</span> <span class="p">{</span>
-  <span class="kd">var</span> <span class="nx">requestnetwork</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">RequestNetwork</span><span class="p">(</span><span class="nx">provider</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span> <span class="c1">// 1 is for Mainnet (1 for rinkeby testnet)</span>
+  <span class="kd">var</span> <span class="nx">requestnetwork</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">RequestNetwork</span><span class="p">(</span><span class="nx">provider</span><span class="p">,</span> <span class="nx">networkId</span><span class="p">);</span>
 <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
   <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
 <span class="p">}</span>
