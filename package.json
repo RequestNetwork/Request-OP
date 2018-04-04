@@ -31,6 +31,7 @@
     "@requestnetwork/request-network.js": "0.4.0",
     "angular-runkit": "^0.6.0",
     "bootstrap": "^4.0.0",
+    "classlist.js": "^1.1.20150312",
     "concurrently": "^3.5.1",
     "core-js": "^2.4.1",
     "dotenv": "^5.0.0",
