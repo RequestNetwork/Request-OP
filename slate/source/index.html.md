@@ -72,7 +72,7 @@ If someone accesses your mnemonic seed, he won’t be able to access the money y
 
 # Integrating Request Network
 
-The developer view of the flow can be seen in the picture above:
+The developer view of the flow can be seen in the picture below:
 
 ![Developer view of the flow](flow-diagram.png)
 
