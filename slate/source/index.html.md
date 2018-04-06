@@ -242,7 +242,7 @@ In order to ease the process for integrating a pay-with-request button on your w
 > Example for redirectiong to the gateway with right parameters:
 
 ```javascript
-var data = encodeURIComponent(JSON.stringify({signedRequest: signedRequest, callbackUrl: myCallbackUrl, networkId: 1}))};
+var data = encodeURIComponent(JSON.stringify({signedRequest: signedRequest, callbackUrl: myCallbackUrl, networkId: 1}));
 document.location.href = 'https://app.request.network/#/pay-with-request/' + data;
 ```
 
