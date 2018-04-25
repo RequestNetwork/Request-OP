@@ -2,7 +2,6 @@
 title: Request Network for Developers
 
 language_tabs: # must be one of https://git.io/vQNgJ
-  - code
 
 toc_footers:
   - <a href='https://request.network'>Visit request.network website</a>
@@ -148,7 +147,7 @@ var requestData = { reason: 'Order #030890 from Just Another Shop',
 var signedRequest = await requestnetwork.requestEthereumService.signRequestAsPayee(
           ['0x8F0255e24B99825e9AD4bb7506678F18C630453F'],
           ['175000000000000000'],
-          new Date().getTime() + 1000 * 60 * 60, // we put expiration after 1 hour here
+          new Date().getTime() + 3600, // we put expiration after 1 hour here
           ['0xf9DF490146b29418a59F43dDb4Afc57Cd3fEf856'],
           JSON.stringify(requestData),
         );
@@ -211,7 +210,7 @@ We use the following format `metadata = { reason: String, orderId: String }`
   <span _ngcontent-c1="">&nbsp;ETH</span>
 </button>
 
-```
+````
 ```css
 pay-with-button { 
   height: 60px;

@@ -164,13 +164,13 @@ html, body {
 
   // this is parent links of the currently selected ToC entry
   .toc-link.active-parent {
-    background-color: $nav-active-parent-bg;
+    // background-color: $nav-active-parent-bg;
     color: $nav-active-parent-text;
   }
 
   .toc-list-h2 {
     display: none;
-    background-color: $nav-subitem-bg;
+    // background-color: $nav-subitem-bg;
     font-weight: 500;
   }
 

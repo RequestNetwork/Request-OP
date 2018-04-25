@@ -203,7 +203,7 @@
       <script src="javascripts/all.js"></script>
   </head>
 
-  <body class="index" data-languages="[&quot;code&quot;]">
+  <body class="index" data-languages="[]">
     <a href="#" id="nav-button">
       <span>
         NAV
@@ -213,9 +213,6 @@
     <div class="toc-wrapper">
       <img src="images/logo.png" class="logo" alt="Logo" />
       <img src="images/name.png" class="name" alt="Name" />
-        <div class="lang-selector">
-              <a href="#" data-language-name="code">code</a>
-        </div>
         <div class="search">
           <input type="text" class="search" id="input-search" placeholder="Search">
         </div>
@@ -427,7 +424,7 @@ Web3 library is a collection of modules which contain specific functionality for
 <span class="kd">var</span> <span class="nx">signedRequest</span> <span class="o">=</span> <span class="nx">await</span> <span class="nx">requestnetwork</span><span class="p">.</span><span class="nx">requestEthereumService</span><span class="p">.</span><span class="nx">signRequestAsPayee</span><span class="p">(</span>
           <span class="p">[</span><span class="s1">'0x8F0255e24B99825e9AD4bb7506678F18C630453F'</span><span class="p">],</span>
           <span class="p">[</span><span class="s1">'175000000000000000'</span><span class="p">],</span>
-          <span class="k">new</span> <span class="nb">Date</span><span class="p">().</span><span class="nx">getTime</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1000</span> <span class="o">*</span> <span class="mi">60</span> <span class="o">*</span> <span class="mi">60</span><span class="p">,</span> <span class="c1">// we put expiration after 1 hour here</span>
+          <span class="k">new</span> <span class="nb">Date</span><span class="p">().</span><span class="nx">getTime</span><span class="p">()</span> <span class="o">+</span> <span class="mi">3600</span><span class="p">,</span> <span class="c1">// we put expiration after 1 hour here</span>
           <span class="p">[</span><span class="s1">'0xf9DF490146b29418a59F43dDb4Afc57Cd3fEf856'</span><span class="p">],</span>
           <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">requestData</span><span class="p">),</span>
         <span class="p">);</span>
@@ -743,9 +740,6 @@ From that point if you stored the signed request information on a database, you 
 
       </div>
       <div class="dark-box">
-          <div class="lang-selector">
-                <a href="#" data-language-name="code">code</a>
-          </div>
       </div>
     </div>
   </body>
