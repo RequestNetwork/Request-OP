@@ -40,8 +40,9 @@ export class ShopComponent {
       res => {
         if (res.signature) {
           const qs = JSON.stringify({signedRequest: res, callbackUrl: this.callbackUrl, networkId: 4});
-          const qsb64 = btoa(qs)
-          this.document.location.href = `${this.gatewayUrl}${qsb64}`;
+          const qsb64 = btoa(qs);
+          const qsb64Encoded = encodeURIComponent(qsb64);
+          this.document.location.href = `${this.gatewayUrl}${qsb64Encoded}`;
         }
       },
       error => {

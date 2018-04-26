@@ -243,7 +243,8 @@ In order to ease the process for integrating a pay-with-request button on your w
 ```javascript
 var qs = JSON.stringify({signedRequest: signedRequest, callbackUrl: myCallbackUrl, networkId: 1}));
 var qsBase64 = btoa(qs);
-document.location.href = 'https://app.request.network/#/pay-with-request/' + qsBase64;
+var qsb64Encoded = encodeURIComponent(qsBase64);
+document.location.href = 'https://app.request.network/#/pay-with-request/' + qsb64Encoded;
 ```
 
 The gateway url is `https://app.request.network/#/pay-with-request/<qsBase64>`
