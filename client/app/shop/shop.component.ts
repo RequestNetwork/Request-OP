@@ -39,7 +39,9 @@ export class ShopComponent {
     this.requestService.signRequest({ orderId: this.orderId }).subscribe(
       res => {
         if (res.signature) {
-          this.document.location.href = `${this.gatewayUrl}${encodeURIComponent(JSON.stringify({signedRequest: res, callbackUrl: this.callbackUrl, networkId: 4}))}`;
+          const qs = JSON.stringify({signedRequest: res, callbackUrl: this.callbackUrl, networkId: 4});
+          const qsb64 = btoa(qs)
+          this.document.location.href = `${this.gatewayUrl}${qsb64}`;
         }
       },
       error => {

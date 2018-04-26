@@ -241,13 +241,14 @@ In order to ease the process for integrating a pay-with-request button on your w
 > Example for redirectiong to the gateway with right parameters:
 
 ```javascript
-var data = encodeURIComponent(JSON.stringify({signedRequest: signedRequest, callbackUrl: myCallbackUrl, networkId: 1}));
-document.location.href = 'https://app.request.network/#/pay-with-request/' + data;
+var qs = JSON.stringify({signedRequest: signedRequest, callbackUrl: myCallbackUrl, networkId: 1}));
+var qsBase64 = btoa(qs);
+document.location.href = 'https://app.request.network/#/pay-with-request/' + qsBase64;
 ```
 
-The gateway url is `https://app.request.network/#/pay-with-request/<data>`
+The gateway url is `https://app.request.network/#/pay-with-request/<qsBase64>`
 
-where data is a string of a JSON object containing the following **mandatory** parameters
+where `qsBase64` is a base 64 encoded string of a JSON object containing the following **mandatory** parameters
 
 Parameter | Type | Description
 --------- | ---- | -----------
