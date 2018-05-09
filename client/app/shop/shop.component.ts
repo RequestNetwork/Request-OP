@@ -1,6 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { RequestService } from '../services/request.service';
-import { environment } from  '../../environments/environment'
+import { environment } from '../../environments/environment';
 
 import { DOCUMENT } from '@angular/platform-browser';
 

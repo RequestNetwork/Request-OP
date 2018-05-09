@@ -23,7 +23,7 @@ search: true
 **Plugins:**
 
 * Shopify: No plugin available yet
-* WooCommerce: Plugin currently being developed ([https://wooreq.com/](https://wooreq.com/))
+* WooCommerce: [https://wooreq.com/](https://wooreq.com/)
 
 **Steps to integrate Request Network:**
 
