@@ -265,6 +265,8 @@ On the gateway, the payer connects to his ether wallet and pays the request.
 
 Once the payment transaction is broadcasted, the gateway redirect to the **callbackUrl** concatenated with the string of the transaction hash.
 
+**<aside class="notice">Please note that the gateway only supports requests in ETH and with only one.</aside>**
+
 Example:
 
 `myCallbackUrl/0xb8e90ba15bb09d1b5baba628fcc01d0302d8d47dc854e85e6deeb5c60f6d3f2b`

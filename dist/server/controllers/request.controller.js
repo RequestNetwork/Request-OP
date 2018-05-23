@@ -54,7 +54,7 @@ var RequestCtrl = /** @class */ (function () {
             ],
         };
         this.signRequest = function (req, res) { return __awaiter(_this, void 0, void 0, function () {
-            var result, err_1;
+            var signedRequest, err_1;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -62,14 +62,21 @@ var RequestCtrl = /** @class */ (function () {
                         _a.label = 1;
                     case 1:
                         _a.trys.push([1, 3, , 4]);
-                        return [4 /*yield*/, this.rn.requestEthereumService.signRequestAsPayee([this.payeeIdAddress], // _payeesIdAddress[]
-                            [this.web3.utils.toWei(this.order.totalAmount, 'ether')], // _expectedAmounts[]
-                            new Date().getTime() + 1000 * 60 * 60, // _expirationDate (1hour)
-                            [this.payeePaymentAddress], // _payeesPaymentAddress[]
-                            JSON.stringify({ reason: "Order #" + req.body.orderId + " from Just Another Shop ", orderId: req.body.orderId }))];
+                        return [4 /*yield*/, this.rn.createSignedRequest(request_network_js_1.Types.Role.Payee, request_network_js_1.Types.Currency.ETH, [
+                                {
+                                    idAddress: this.payeeIdAddress,
+                                    paymentAddress: this.payeePaymentAddress,
+                                    expectedAmount: this.web3.utils.toWei(this.order.totalAmount),
+                                },
+                            ], Date.now() + 3600 * 1000, {
+                                data: {
+                                    reason: "Order #" + req.body.orderId + " from Just Another Shop ",
+                                    orderId: req.body.orderId,
+                                },
+                            })];
                     case 2:
-                        result = _a.sent();
-                        res.status(200).json(result);
+                        signedRequest = _a.sent();
+                        res.status(200).json(signedRequest);
                         return [3 /*break*/, 4];
                     case 3:
                         err_1 = _a.sent();
@@ -106,10 +113,9 @@ var RequestCtrl = /** @class */ (function () {
                         }
                         // check if payee is equal to payeePaymentAdress when it's given as a param to signRequestAsPayee
                         if (_payeesPaymentAddress[0]) {
-                            if (this.payeePaymentAddress.toLowerCase() !== _payeesPaymentAddress[0].toLowerCase()) {
-                                return [2 /*return*/, res
-                                        .status(400)
-                                        .send('Payee payment address not matching')];
+                            if (this.payeePaymentAddress.toLowerCase() !==
+                                _payeesPaymentAddress[0].toLowerCase()) {
+                                return [2 /*return*/, res.status(400).send('Payee payment address not matching')];
                             }
                         }
                         // get ipfs data
@@ -121,10 +127,11 @@ var RequestCtrl = /** @class */ (function () {
                         _a.ipfsData = _c.apply(_b, [_d.sent()]);
                         // check if correct orderId
                         if (result.ipfsData.orderId !== this.order.orderId) {
-                            return [2 /*return*/, res.status(400).send('Couldn\'t match to orderId')];
+                            return [2 /*return*/, res.status(400).send("Couldn't match to orderId")];
                         }
                         // check if correct payment
-                        if (result.transaction.value < result.data.mainPayee.expectedAmount.toString()) {
+                        if (result.transaction.value <
+                            result.data.mainPayee.expectedAmount.toString()) {
                             return [2 /*return*/, res.status(400).send('Insufficient amount paid')];
                         }
                         return [2 /*return*/, res.status(200).json(result)];
