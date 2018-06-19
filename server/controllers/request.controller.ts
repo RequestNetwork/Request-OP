@@ -62,22 +62,19 @@ export default class RequestCtrl {
     } else {
       res.status(400).send('orderId not found');
     }
-  }
+  };
 
   getTxDetails = async (req, res) => {
     try {
       const result = await this.rn.requestCoreService.getRequestByTransactionHash(
         req.params.txHash
       );
-
-      console.log('result:\n', result);
-
-      const _payeesPaymentAddress =
-        result.transaction.method.parameters._payeesPaymentAddress;
       // check if broadcastSignedRequestAsPayer action
       if (
-        true ||
-        result.transaction.method.name !== 'broadcastSignedRequestAsPayer'
+        ![
+          'broadcastSignedRequestAsPayerAction',
+          'broadcastSignedRequestAsPayer'
+        ].includes(result.transaction.method.name)
       ) {
         return res.status(400).send('No payment information found');
       }
@@ -85,19 +82,19 @@ export default class RequestCtrl {
       result.data = this.rn.requestCoreService.parseBytesRequest(
         result.transaction.method.parameters._requestData
       );
-      // check if creator matches known payeeIdAdress
+      // check if creator matches known payeeIdAddress
       if (
-        true ||
         result.data.creator.toLowerCase() !== this.payeeIdAddress.toLowerCase()
       ) {
         return res.status(400).send('Unknown request');
       }
+      const _payeesPaymentAddress =
+        result.transaction.method.parameters._payeesPaymentAddress;
       // check if payee is equal to payeePaymentAdress when it's given as a param to signRequestAsPayee
-      if (true || _payeesPaymentAddress[0]) {
+      if (_payeesPaymentAddress[0]) {
         if (
-          true ||
           this.payeePaymentAddress.toLowerCase() !==
-            _payeesPaymentAddress[0].toLowerCase()
+          _payeesPaymentAddress[0].toLowerCase()
         ) {
           return res.status(400).send('Payee payment address not matching');
         }
@@ -107,14 +104,14 @@ export default class RequestCtrl {
         await this.rn.requestCoreService.getIpfsFile(result.data.data)
       );
       // check if correct orderId
-      if (true || result.ipfsData.orderId !== this.order.orderId) {
+      if (result.ipfsData.orderId !== this.order.orderId) {
         return res.status(400).send(`Couldn't match to orderId`);
       }
       // check if correct payment
       if (
-        true ||
-        result.transaction.value <
-          result.data.mainPayee.expectedAmount.toString()
+        new this.web3.utils.BN(
+          result.transaction.method.parameters._payeeAmounts[0]
+        ).lt(new this.web3.utils.BN(result.data.mainPayee.expectedAmount))
       ) {
         return res.status(400).send('Insufficient amount paid');
       }
@@ -123,5 +120,5 @@ export default class RequestCtrl {
       console.error(err);
       res.status(400).send('wrong transaction hash');
     }
-  }
+  };
 }

@@ -22,7 +22,7 @@ search: true
 
 **Plugins:**
 
-* Shopify: No plugin available yet
+* Shopify: [https://reqify.io/](https://reqify.io/)
 * WooCommerce: [https://wooreq.com/](https://wooreq.com/)
 
 **Steps to integrate Request Network:**
@@ -386,9 +386,9 @@ Also you will have to call the method getRequestByTransactionHash until you rece
 
 Once you receive the **transaction** object, you need to check some parameters to ensure it actually corresponds to the broadcast of a request payment transaction.
 
-* First one is verifying the name of the method called is "broadcastSignedRequestAsPayer":
+* First one is verifying the name of the method called is "broadcastSignedRequestAsPayer" or "broadcastSignedRequestAsPayerAction" (for ERC20 requests):
 
-`transaction.method.name == 'broadcastSignedRequestAsPayer'`
+`transaction.method.name === 'broadcastSignedRequestAsPayer' || transaction.method.name === 'broadcastSignedRequestAsPayerAction'`
 
 > Example for getting additionnal info of the transaction:
 

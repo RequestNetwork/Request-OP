@@ -100,25 +100,24 @@ var RequestCtrl = /** @class */ (function () {
                         return [4 /*yield*/, this.rn.requestCoreService.getRequestByTransactionHash(req.params.txHash)];
                     case 1:
                         result = _d.sent();
-                        console.log('result:\n', result);
-                        _payeesPaymentAddress = result.transaction.method.parameters._payeesPaymentAddress;
                         // check if broadcastSignedRequestAsPayer action
-                        if (true ||
-                            result.transaction.method.name !== 'broadcastSignedRequestAsPayer') {
+                        if (![
+                            'broadcastSignedRequestAsPayerAction',
+                            'broadcastSignedRequestAsPayer'
+                        ].includes(result.transaction.method.name)) {
                             return [2 /*return*/, res.status(400).send('No payment information found')];
                         }
                         // get request data
                         result.data = this.rn.requestCoreService.parseBytesRequest(result.transaction.method.parameters._requestData);
-                        // check if creator matches known payeeIdAdress
-                        if (true ||
-                            result.data.creator.toLowerCase() !== this.payeeIdAddress.toLowerCase()) {
+                        // check if creator matches known payeeIdAddress
+                        if (result.data.creator.toLowerCase() !== this.payeeIdAddress.toLowerCase()) {
                             return [2 /*return*/, res.status(400).send('Unknown request')];
                         }
+                        _payeesPaymentAddress = result.transaction.method.parameters._payeesPaymentAddress;
                         // check if payee is equal to payeePaymentAdress when it's given as a param to signRequestAsPayee
-                        if (true || _payeesPaymentAddress[0]) {
-                            if (true ||
-                                this.payeePaymentAddress.toLowerCase() !==
-                                    _payeesPaymentAddress[0].toLowerCase()) {
+                        if (_payeesPaymentAddress[0]) {
+                            if (this.payeePaymentAddress.toLowerCase() !==
+                                _payeesPaymentAddress[0].toLowerCase()) {
                                 return [2 /*return*/, res.status(400).send('Payee payment address not matching')];
                             }
                         }
@@ -130,13 +129,11 @@ var RequestCtrl = /** @class */ (function () {
                         // get ipfs data
                         _a.ipfsData = _c.apply(_b, [_d.sent()]);
                         // check if correct orderId
-                        if (true || result.ipfsData.orderId !== this.order.orderId) {
+                        if (result.ipfsData.orderId !== this.order.orderId) {
                             return [2 /*return*/, res.status(400).send("Couldn't match to orderId")];
                         }
                         // check if correct payment
-                        if (true ||
-                            result.transaction.value <
-                                result.data.mainPayee.expectedAmount.toString()) {
+                        if (new this.web3.utils.BN(result.transaction.method.parameters._payeeAmounts[0]).lt(new this.web3.utils.BN(result.data.mainPayee.expectedAmount))) {
                             return [2 /*return*/, res.status(400).send('Insufficient amount paid')];
                         }
                         return [2 /*return*/, res.status(200).json(result)];
