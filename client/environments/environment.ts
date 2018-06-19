@@ -5,5 +5,5 @@
 
 export const environment = {
   production: false,
-  gatewayUrl: 'http://localhost:8080/#/pay-with-request/',
+  gatewayUrl: 'https://localhost:8080/#/pay-with-request/',
 };

@@ -28,7 +28,7 @@
     "@angular/platform-browser": "^5.2.0",
     "@angular/platform-browser-dynamic": "^5.2.0",
     "@angular/router": "^5.2.0",
-    "@requestnetwork/request-network.js": "0.6.2",
+    "@requestnetwork/request-network.js": "0.7.3",
     "angular-runkit": "^0.6.0",
     "bootstrap": "^4.0.0",
     "classlist.js": "^1.1.20150312",
@@ -42,7 +42,7 @@
     "rxjs": "^5.5.6",
     "truffle-hdwallet-provider": "0.0.3",
     "web-animations-js": "^2.3.1",
-    "web3": "1.0.0-beta.29",
+    "web3": "1.0.0-beta.30",
     "zone.js": "0.8.20"
   },
   "devDependencies": {

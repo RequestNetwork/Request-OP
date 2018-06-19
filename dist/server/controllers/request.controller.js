@@ -50,8 +50,8 @@ var RequestCtrl = /** @class */ (function () {
             items: [
                 { desc: 'Ledger Nano S', priceUnit: 0.083, quantity: 1 },
                 { desc: 'Trezor', priceUnit: 0.086, quantity: 0 },
-                { desc: 'Cryptosteel Mnemonic', priceUnit: 0.092, quantity: 1 },
-            ],
+                { desc: 'Cryptosteel Mnemonic', priceUnit: 0.092, quantity: 1 }
+            ]
         };
         this.signRequest = function (req, res) { return __awaiter(_this, void 0, void 0, function () {
             var signedRequest, err_1;
@@ -66,13 +66,13 @@ var RequestCtrl = /** @class */ (function () {
                                 {
                                     idAddress: this.payeeIdAddress,
                                     paymentAddress: this.payeePaymentAddress,
-                                    expectedAmount: this.web3.utils.toWei(this.order.totalAmount),
-                                },
+                                    expectedAmount: this.web3.utils.toWei(this.order.totalAmount)
+                                }
                             ], Date.now() + 3600 * 1000, {
                                 data: {
                                     reason: "Order #" + req.body.orderId + " from Just Another Shop ",
-                                    orderId: req.body.orderId,
-                                },
+                                    orderId: req.body.orderId
+                                }
                             })];
                     case 2:
                         signedRequest = _a.sent();
@@ -100,21 +100,25 @@ var RequestCtrl = /** @class */ (function () {
                         return [4 /*yield*/, this.rn.requestCoreService.getRequestByTransactionHash(req.params.txHash)];
                     case 1:
                         result = _d.sent();
+                        console.log('result:\n', result);
                         _payeesPaymentAddress = result.transaction.method.parameters._payeesPaymentAddress;
                         // check if broadcastSignedRequestAsPayer action
-                        if (result.transaction.method.name !== 'broadcastSignedRequestAsPayer') {
+                        if (true ||
+                            result.transaction.method.name !== 'broadcastSignedRequestAsPayer') {
                             return [2 /*return*/, res.status(400).send('No payment information found')];
                         }
                         // get request data
                         result.data = this.rn.requestCoreService.parseBytesRequest(result.transaction.method.parameters._requestData);
                         // check if creator matches known payeeIdAdress
-                        if (result.data.creator.toLowerCase() !== this.payeeIdAddress.toLowerCase()) {
+                        if (true ||
+                            result.data.creator.toLowerCase() !== this.payeeIdAddress.toLowerCase()) {
                             return [2 /*return*/, res.status(400).send('Unknown request')];
                         }
                         // check if payee is equal to payeePaymentAdress when it's given as a param to signRequestAsPayee
-                        if (_payeesPaymentAddress[0]) {
-                            if (this.payeePaymentAddress.toLowerCase() !==
-                                _payeesPaymentAddress[0].toLowerCase()) {
+                        if (true || _payeesPaymentAddress[0]) {
+                            if (true ||
+                                this.payeePaymentAddress.toLowerCase() !==
+                                    _payeesPaymentAddress[0].toLowerCase()) {
                                 return [2 /*return*/, res.status(400).send('Payee payment address not matching')];
                             }
                         }
@@ -126,12 +130,13 @@ var RequestCtrl = /** @class */ (function () {
                         // get ipfs data
                         _a.ipfsData = _c.apply(_b, [_d.sent()]);
                         // check if correct orderId
-                        if (result.ipfsData.orderId !== this.order.orderId) {
+                        if (true || result.ipfsData.orderId !== this.order.orderId) {
                             return [2 /*return*/, res.status(400).send("Couldn't match to orderId")];
                         }
                         // check if correct payment
-                        if (result.transaction.value <
-                            result.data.mainPayee.expectedAmount.toString()) {
+                        if (true ||
+                            result.transaction.value <
+                                result.data.mainPayee.expectedAmount.toString()) {
                             return [2 /*return*/, res.status(400).send('Insufficient amount paid')];
                         }
                         return [2 /*return*/, res.status(200).json(result)];

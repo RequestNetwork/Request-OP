@@ -82,9 +82,9 @@ The developer view of the flow can be seen in the picture below:
 > On your backend, import the libraries:
 
 ```javascript
-import RequestNetwork from '@requestnetwork/request-network.js';
+import RequestNetwork, { Types } from '@requestnetwork/request-network.js';
 
-var HDWalletProvider = require ('truffle-hdwallet-provider');
+const HDWalletProvider = require('truffle-hdwallet-provider');
 ```
 
 * Install these two dependencies:
@@ -100,15 +100,11 @@ var HDWalletProvider = require ('truffle-hdwallet-provider');
 > Instantiating requestnetwork with HDWalletProvider on **Mainnet**:
 
 ```javascript
-var mnemonic = 'twelve word mnemonic phrase of the wallet used for signing the requests';
-var provider = new HDWalletProvider(mnemonic, 'https://mainnet.infura.io/');
-var networkId = 1; // 1 is for Mainnet (4 for Rinkeby testnet, 99 for local rpc)
+const mnemonic = 'twelve word mnemonic phrase of the wallet used for signing the requests';
+const provider = new HDWalletProvider(mnemonic, 'https://mainnet.infura.io/');
+const networkId = 1; // 1 is for Mainnet (4 for Rinkeby testnet, 99 for local rpc)
 
-try {
-  var requestnetwork = new RequestNetwork(provider, networkId);
-} catch (err) {
-  console.error(err);
-}
+const requestnetwork = new RequestNetwork(provider, networkId);
 ```
 
 request-network.js needs a Web3 provider to sign requests.
@@ -141,54 +137,71 @@ networkId | number | network id you're using, **must match the network of the pr
 > Example:
 
 ```javascript
-var requestData = { reason: 'Order #030890 from Just Another Shop',
+const requestData = { reason: 'Order #030890 from Just Another Shop',
                     orderId: '030890' }
 
-var signedRequest = await requestnetwork.requestEthereumService.signRequestAsPayee(
-          ['0x8F0255e24B99825e9AD4bb7506678F18C630453F'],
-          ['175000000000000000'],
-          new Date().getTime() + 3600, // we put expiration after 1 hour here
-          ['0xf9DF490146b29418a59F43dDb4Afc57Cd3fEf856'],
-          JSON.stringify(requestData),
-        );
+const signedRequest = await this.rn.createSignedRequest(
+  Types.Role.Payee,
+  Types.Currency.ETH,
+  [
+    {
+      idAddress: 0x8F0255e24B99825e9AD4bb7506678F18C630453F,
+      paymentAddress: 0xf9DF490146b29418a59F43dDb4Afc57Cd3fEf856,
+      expectedAmount: 175000000000000000,
+    },
+  ],
+  Date.now() + 3600 * 1000, // we put expiration after 1 day here
+  {
+    data: requestData
+  }
+);
 ```
 
 > The above command returns JSON structured like this:
 
 ```json
 {
-  "currencyContract": "0xafa312973909c3a541665e11c883a24a8eb10b2c",
-  "data": "QmSsrdAPhD5UkRVDKVpCwf63nrUxBaNbYmpZ2njbku9Mi5",
-  "expectedAmounts": [
-    "175000000000000000"
-  ],
-  "expirationDate": 1522207081496,
-  "hash": "0x0071762fae039b38da6c0685172c2de8df98eed1cbfc7b709bbe23df51c16fb3",
-  "payeesIdAddress": [
-    "0x8F0255e24B99825e9AD4bb7506678F18C630453F"
-  ],
-  "payeesPaymentAddress": [
-    "0xf9DF490146b29418a59F43dDb4Afc57Cd3fEf856"
-  ],
-  "signature": "0x4708d801416d8ee4604af4bf8b3a2328592ab450d6a48c0d66446e26b51066cb2d2c568d37c38ae1bc3b48f1582e24b9c8b63bac9c548d8754f5d50b33e5fb491c"
+  "signedRequestData": {
+    "currencyContract": "0xe241d3757dad0ef86d0fcc5fe90e20f955743ed5",
+    "data": "QmSsrdAPhD5UkRVDKVpCwf63nrUxBaNbYmpZ2njbku9Mi5",
+    "expectedAmounts": [
+      "175000000000000000"
+    ],
+    "expirationDate": 1529315288204,
+    "hash": "0x763ba38dca436907e0a34233a8ecc7568c0295ea03f144455defaa4e24f858ab",
+    "payeesIdAddress": [
+      "0x8F0255e24B99825e9AD4bb7506678F18C630453F"
+    ],
+    "payeesPaymentAddress": [
+      "0xf9DF490146b29418a59F43dDb4Afc57Cd3fEf856"
+    ],
+    "signature": "0xf9a5218d6a6baa8415d35ba6fe171a034fd9da8f5f458a01a2858ac5333e752813e7786fd1d57e5e81de4db493ee00ec0ef85e2863c6b7671f9df34be5eb86831c"
+  },
+  "currency": 2
 }
 ```
 
 Now we need to ask the library to create a request for payment. 
 
-**`async requestnetwork.requestEthereumService.signRequestAsPayee(payeesIdAddress, expectedAmounts, expirationDate, payeesPaymentAddress, metadata)`** (see example)
+**`async requestNetwork.createSignedRequest(as, currency, payees, expirationDate, requestOptions)`** (see example)
 
 Parameter | Type | Description
 --------- | ---- | -----------
-payeesIdAddress | string[] | ID address of the payee ([see step in Preconfiguration](#create-an-account-to-store-your-identity)). Additional payees can be added in the array. Position 0 is the main payee (the one who sign the request).
-expectedAmounts | number[] | Amount in Wei of the payment Request for each payee. (1Eth = 1000000000000000000 Wei)
-expirationDate | number | Timestamp in seconds of the date after which the signed request can not be paid anymore. We recommend to set:  `new Date().getTime() + 3600`
-payeesPaymentAddress | string[] (optional) | Address on which to receive the payment ([see step in Preconfiguration](#create-a-wallet-to-store-your-currencies)) for each payee
-metadata | String (optional) | Json string of the request's details (data will be hosted on ipfs). See below for more information
+as | Types.Role | Who is creating the Request (only Payee is implemented for now)
+currency | Types.Currency | Currency of the Request (ETH, BTC, REQ, etc.)
+payees | Types.IPayee[] | Array of payees (see below for IPayee details)
+expirationDate | number | Timestamp in second of the date after which the signed request is not broadcastable
+requestOptions | Types.IRequestCreationOptions | Request creation options. Includes request data, extension and ethereum transaction options.
 
-### c. Other currencies (available soon)
+**IPayee** is an object containing all the payment information, containing the following parameters:
 
-### d. Store metadata
+Parameter | Type | Description
+--------- | ---- | -----------
+idAddress | string | ID address of the payee ([see step in Preconfiguration](#create-an-account-to-store-your-identity)).
+paymentAddress | string| Address on which to receive the payment ([see step in Preconfiguration](#create-a-wallet-to-store-your-currencies)).
+expectedAmount | number | Amount in Wei of the payment Request. (1Eth = 1000000000000000000 Wei)
+
+### c. Store metadata
 
 Request Network supports adding metadata to every request. 
 
@@ -196,7 +209,7 @@ Privacy: The metadata are public as of today. You will be able to select the pri
 
 Accounting: Accounting standardized data will be specified during the first beta phase.
 
-We use the following format `metadata = { reason: String, orderId: String }`
+We use the following format `data = { reason: String, orderId: String }`, as a parameter of **requestOptions** when creating the signedRequest.
 
 ## 2. Add a payment button on your front-end and redirect the user to the gateway
 
@@ -241,9 +254,9 @@ In order to ease the process for integrating a pay-with-request button on your w
 > Example for redirectiong to the gateway with right parameters:
 
 ```javascript
-var qs = JSON.stringify({signedRequest: signedRequest, callbackUrl: myCallbackUrl, networkId: 1}));
-var qsBase64 = btoa(qs);
-var qsb64Encoded = encodeURIComponent(qsBase64);
+const qs = JSON.stringify({signedRequest: signedRequest, callbackUrl: myCallbackUrl, networkId: 1}));
+const qsBase64 = btoa(qs);
+const qsb64Encoded = encodeURIComponent(qsBase64);
 document.location.href = 'https://app.request.network/#/pay-with-request/' + qsb64Encoded;
 ```
 
@@ -265,7 +278,9 @@ On the gateway, the payer connects to his ether wallet and pays the request.
 
 Once the payment transaction is broadcasted, the gateway redirect to the **callbackUrl** concatenated with the string of the transaction hash.
 
-**<aside class="notice">Please note that the gateway only supports requests in ETH and with only one.</aside>**
+**<aside class="notice">
+Please note that the gateway only supports requests in ETH and with only one payee at the moment.
+</aside>**
 
 Example:
 
@@ -295,8 +310,8 @@ https://app.request.network/#/search/0x54B4B2d8E2ECcC99385B01bE13DFB473c7885286
 
 ```javascript
  try {
-      var txHash = 0xb8e90ba15bb09d1b5baba628fcc01d0302d8d47dc854e85e6deeb5c60f6d3f2b;
-      var result = await requestnetwork.requestCoreService.getRequestByTransactionHash(txHash);
+      const txHash = 0xb8e90ba15bb09d1b5baba628fcc01d0302d8d47dc854e85e6deeb5c60f6d3f2b;
+      const result = await requestnetwork.requestCoreService.getRequestByTransactionHash(txHash);
     } catch (err) {
       console.error(err);
     }
