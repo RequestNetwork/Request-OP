@@ -280,7 +280,7 @@
 <p><strong>Plugins:</strong></p>
 
 <ul>
-<li>Shopify: <a href="https://reqify.io/">https://reqify.io/</a></li>
+<li>Shopify: No plugin available yet</li>
 <li>WooCommerce: <a href="https://wooreq.com/">https://wooreq.com/</a></li>
 </ul>
 
@@ -470,22 +470,22 @@ Web3 library is a collection of modules which contain specific functionality for
 <tr>
 <td>as</td>
 <td>Types.Role</td>
-<td>Who is creating the Request (only Payee is implemented for now)</td>
+<td>Who is creating the Request (only Payee is implemented for now).</td>
 </tr>
 <tr>
 <td>currency</td>
 <td>Types.Currency</td>
-<td>Currency of the Request (ETH, BTC, REQ, etc.)</td>
+<td>Currency of the Request (ETH, BTC, REQ, etc.).</td>
 </tr>
 <tr>
 <td>payees</td>
 <td>Types.IPayee[]</td>
-<td>Array of payees (see below for IPayee details)</td>
+<td>Array of payees (see below for IPayee details).</td>
 </tr>
 <tr>
 <td>expirationDate</td>
 <td>number</td>
-<td>Timestamp in second of the date after which the signed request is not broadcastable</td>
+<td>Timestamp in second of the date after which the signed request is not broadcastable anymore.</td>
 </tr>
 <tr>
 <td>requestOptions</td>
@@ -516,17 +516,17 @@ Web3 library is a collection of modules which contain specific functionality for
 <tr>
 <td>expectedAmount</td>
 <td>number</td>
-<td>Amount in Wei of the payment Request. (1Eth = 1000000000000000000 Wei)</td>
+<td>Amount in Wei of the payment Request. (1Eth = 1000000000000000000 Wei).</td>
 </tr>
 </tbody></table>
-<h3 id='c-store-metadata'>c. Store metadata</h3>
+<h3 id='c-other-currencies-available-soon'>c. Other currencies (available soon)</h3><h3 id='d-store-metadata'>d. Store metadata</h3>
 <p>Request Network supports adding metadata to every request. </p>
 
 <p>Privacy: The metadata are public as of today. You will be able to select the privacy during the second part of the beta phase.</p>
 
 <p>Accounting: Accounting standardized data will be specified during the first beta phase.</p>
 
-<p>We use the following format <code>data = { reason: String, orderId: String }</code>, as a parameter of <strong>requestOptions</strong> when creating the signedRequest.</p>
+<p>We use the following format <code>metadata = { reason: String, orderId: String }</code></p>
 <h2 id='2-add-a-payment-button-on-your-front-end-and-redirect-the-user-to-the-gateway'>2. Add a payment button on your front-end and redirect the user to the gateway</h2>
 <blockquote>
 <p>Example of Html and css code for styling a “pay with ETH” button:</p>
@@ -556,13 +556,13 @@ Web3 library is a collection of modules which contain specific functionality for
 <p><img src="images/button.png" alt="pay-with button" /></p>
 
 <p>See example code for styling a &quot;paywith ETH&quot; button.</p>
-<h3 id='b-redirect-to-the-gateway'>b.  Redirect to the gateway</h3>
+<h3 id='b-redirect-to-the-gateway'>b. Redirect to the gateway</h3>
 <p>In order to ease the process for integrating a pay-with-request button on your website, the request app provides a gateway for displaying the info of a signed request and allowing someone to pay it.</p>
 
 <blockquote>
 <p>Example for redirectiong to the gateway with right parameters:</p>
 </blockquote>
-<pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">qs</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span><span class="na">signedRequest</span><span class="p">:</span> <span class="nx">signedRequest</span><span class="p">,</span> <span class="na">callbackUrl</span><span class="p">:</span> <span class="nx">myCallbackUrl</span><span class="p">,</span> <span class="na">networkId</span><span class="p">:</span> <span class="mi">1</span><span class="p">}));</span>
+<pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">qs</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span><span class="na">signedRequest</span><span class="p">:</span> <span class="nx">signedRequest</span><span class="p">.</span><span class="nx">signedRequestData</span><span class="p">,</span> <span class="na">callbackUrl</span><span class="p">:</span> <span class="nx">myCallbackUrl</span><span class="p">,</span> <span class="na">networkId</span><span class="p">:</span> <span class="mi">1</span><span class="p">}));</span>
 <span class="kr">const</span> <span class="nx">qsBase64</span> <span class="o">=</span> <span class="nx">btoa</span><span class="p">(</span><span class="nx">qs</span><span class="p">);</span>
 <span class="kr">const</span> <span class="nx">qsb64Encoded</span> <span class="o">=</span> <span class="nb">encodeURIComponent</span><span class="p">(</span><span class="nx">qsBase64</span><span class="p">);</span>
 <span class="nb">document</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">href</span> <span class="o">=</span> <span class="s1">'https://app.request.network/#/pay-with-request/'</span> <span class="o">+</span> <span class="nx">qsb64Encoded</span><span class="p">;</span>
@@ -707,10 +707,10 @@ Also you will have to call the method getRequestByTransactionHash until you rece
 <p>Once you receive the <strong>transaction</strong> object, you need to check some parameters to ensure it actually corresponds to the broadcast of a request payment transaction.</p>
 
 <ul>
-<li>First one is verifying the name of the method called is &quot;broadcastSignedRequestAsPayer&quot; or &quot;broadcastSignedRequestAsPayerAction&quot; (for ERC20 requests):</li>
+<li>First one is verifying the name of the method called is &quot;broadcastSignedRequestAsPayer&quot;:</li>
 </ul>
 
-<p><code>transaction.method.name === &#39;broadcastSignedRequestAsPayer&#39; || transaction.method.name === &#39;broadcastSignedRequestAsPayerAction&#39;</code></p>
+<p><code>transaction.method.name == &#39;broadcastSignedRequestAsPayer&#39;</code></p>
 
 <blockquote>
 <p>Example for getting additionnal info of the transaction:</p>

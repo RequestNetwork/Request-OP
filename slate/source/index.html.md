@@ -22,7 +22,7 @@ search: true
 
 **Plugins:**
 
-* Shopify: [https://reqify.io/](https://reqify.io/)
+* Shopify: No plugin available yet
 * WooCommerce: [https://wooreq.com/](https://wooreq.com/)
 
 **Steps to integrate Request Network:**
@@ -187,10 +187,10 @@ Now we need to ask the library to create a request for payment.
 
 Parameter | Type | Description
 --------- | ---- | -----------
-as | Types.Role | Who is creating the Request (only Payee is implemented for now)
-currency | Types.Currency | Currency of the Request (ETH, BTC, REQ, etc.)
-payees | Types.IPayee[] | Array of payees (see below for IPayee details)
-expirationDate | number | Timestamp in second of the date after which the signed request is not broadcastable
+as | Types.Role | Who is creating the Request (only Payee is implemented for now).
+currency | Types.Currency | Currency of the Request (ETH, BTC, REQ, etc.).
+payees | Types.IPayee[] | Array of payees (see below for IPayee details).
+expirationDate | number | Timestamp in second of the date after which the signed request is not broadcastable anymore.
 requestOptions | Types.IRequestCreationOptions | Request creation options. Includes request data, extension and ethereum transaction options.
 
 **IPayee** is an object containing all the payment information, containing the following parameters:
@@ -199,9 +199,11 @@ Parameter | Type | Description
 --------- | ---- | -----------
 idAddress | string | ID address of the payee ([see step in Preconfiguration](#create-an-account-to-store-your-identity)).
 paymentAddress | string| Address on which to receive the payment ([see step in Preconfiguration](#create-a-wallet-to-store-your-currencies)).
-expectedAmount | number | Amount in Wei of the payment Request. (1Eth = 1000000000000000000 Wei)
+expectedAmount | number | Amount in Wei of the payment Request. (1Eth = 1000000000000000000 Wei).
 
-### c. Store metadata
+### c. Other currencies (available soon)
+
+### d. Store metadata
 
 Request Network supports adding metadata to every request. 
 
@@ -209,7 +211,7 @@ Privacy: The metadata are public as of today. You will be able to select the pri
 
 Accounting: Accounting standardized data will be specified during the first beta phase.
 
-We use the following format `data = { reason: String, orderId: String }`, as a parameter of **requestOptions** when creating the signedRequest.
+We use the following format `metadata = { reason: String, orderId: String }`
 
 ## 2. Add a payment button on your front-end and redirect the user to the gateway
 
@@ -247,14 +249,14 @@ pay-with-button {
 
 See example code for styling a "paywith ETH" button.
 
-### b.  Redirect to the gateway
+### b. Redirect to the gateway
 
 In order to ease the process for integrating a pay-with-request button on your website, the request app provides a gateway for displaying the info of a signed request and allowing someone to pay it.
 
 > Example for redirectiong to the gateway with right parameters:
 
 ```javascript
-const qs = JSON.stringify({signedRequest: signedRequest, callbackUrl: myCallbackUrl, networkId: 1}));
+const qs = JSON.stringify({signedRequest: signedRequest.signedRequestData, callbackUrl: myCallbackUrl, networkId: 1}));
 const qsBase64 = btoa(qs);
 const qsb64Encoded = encodeURIComponent(qsBase64);
 document.location.href = 'https://app.request.network/#/pay-with-request/' + qsb64Encoded;
@@ -386,9 +388,9 @@ Also you will have to call the method getRequestByTransactionHash until you rece
 
 Once you receive the **transaction** object, you need to check some parameters to ensure it actually corresponds to the broadcast of a request payment transaction.
 
-* First one is verifying the name of the method called is "broadcastSignedRequestAsPayer" or "broadcastSignedRequestAsPayerAction" (for ERC20 requests):
+* First one is verifying the name of the method called is "broadcastSignedRequestAsPayer":
 
-`transaction.method.name === 'broadcastSignedRequestAsPayer' || transaction.method.name === 'broadcastSignedRequestAsPayerAction'`
+`transaction.method.name == 'broadcastSignedRequestAsPayer'`
 
 > Example for getting additionnal info of the transaction:
 
