@@ -22,7 +22,7 @@ search: true
 
 **Plugins:**
 
-* Shopify: No plugin available yet
+* Shopify: [https://reqify.io/](https://reqify.io/)
 * WooCommerce: [https://wooreq.com/](https://wooreq.com/)
 
 **Steps to integrate Request Network:**
@@ -201,9 +201,7 @@ idAddress | string | ID address of the payee ([see step in Preconfiguration](#cr
 paymentAddress | string| Address on which to receive the payment ([see step in Preconfiguration](#create-a-wallet-to-store-your-currencies)).
 expectedAmount | number | Amount in Wei of the payment Request. (1Eth = 1000000000000000000 Wei).
 
-### c. Other currencies (available soon)
-
-### d. Store metadata
+### c. Store metadata
 
 Request Network supports adding metadata to every request. 
 
@@ -211,7 +209,7 @@ Privacy: The metadata are public as of today. You will be able to select the pri
 
 Accounting: Accounting standardized data will be specified during the first beta phase.
 
-We use the following format `metadata = { reason: String, orderId: String }`
+We use the following format `data = { reason: String, orderId: String }`, as a parameter of **requestOptions** when creating the signedRequest.
 
 ## 2. Add a payment button on your front-end and redirect the user to the gateway
 
@@ -388,9 +386,9 @@ Also you will have to call the method getRequestByTransactionHash until you rece
 
 Once you receive the **transaction** object, you need to check some parameters to ensure it actually corresponds to the broadcast of a request payment transaction.
 
-* First one is verifying the name of the method called is "broadcastSignedRequestAsPayer":
+* First one is verifying the name of the method called is "broadcastSignedRequestAsPayer" or "broadcastSignedRequestAsPayerAction" (for ERC20 requests):
 
-`transaction.method.name == 'broadcastSignedRequestAsPayer'`
+`transaction.method.name === 'broadcastSignedRequestAsPayer' || transaction.method.name === 'broadcastSignedRequestAsPayerAction'`
 
 > Example for getting additionnal info of the transaction:
 
