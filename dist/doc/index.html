@@ -280,7 +280,7 @@
 <p><strong>Plugins:</strong></p>
 
 <ul>
-<li>Shopify: No plugin available yet</li>
+<li>Shopify: <a href="https://reqify.io/">https://reqify.io/</a></li>
 <li>WooCommerce: <a href="https://wooreq.com/">https://wooreq.com/</a></li>
 </ul>
 
@@ -519,14 +519,14 @@ Web3 library is a collection of modules which contain specific functionality for
 <td>Amount in Wei of the payment Request. (1Eth = 1000000000000000000 Wei).</td>
 </tr>
 </tbody></table>
-<h3 id='c-other-currencies-available-soon'>c. Other currencies (available soon)</h3><h3 id='d-store-metadata'>d. Store metadata</h3>
+<h3 id='c-store-metadata'>c. Store metadata</h3>
 <p>Request Network supports adding metadata to every request. </p>
 
 <p>Privacy: The metadata are public as of today. You will be able to select the privacy during the second part of the beta phase.</p>
 
 <p>Accounting: Accounting standardized data will be specified during the first beta phase.</p>
 
-<p>We use the following format <code>metadata = { reason: String, orderId: String }</code></p>
+<p>We use the following format <code>data = { reason: String, orderId: String }</code>, as a parameter of <strong>requestOptions</strong> when creating the signedRequest.</p>
 <h2 id='2-add-a-payment-button-on-your-front-end-and-redirect-the-user-to-the-gateway'>2. Add a payment button on your front-end and redirect the user to the gateway</h2>
 <blockquote>
 <p>Example of Html and css code for styling a “pay with ETH” button:</p>
@@ -707,10 +707,10 @@ Also you will have to call the method getRequestByTransactionHash until you rece
 <p>Once you receive the <strong>transaction</strong> object, you need to check some parameters to ensure it actually corresponds to the broadcast of a request payment transaction.</p>
 
 <ul>
-<li>First one is verifying the name of the method called is &quot;broadcastSignedRequestAsPayer&quot;:</li>
+<li>First one is verifying the name of the method called is &quot;broadcastSignedRequestAsPayer&quot; or &quot;broadcastSignedRequestAsPayerAction&quot; (for ERC20 requests):</li>
 </ul>
 
-<p><code>transaction.method.name == &#39;broadcastSignedRequestAsPayer&#39;</code></p>
+<p><code>transaction.method.name === &#39;broadcastSignedRequestAsPayer&#39; || transaction.method.name === &#39;broadcastSignedRequestAsPayerAction&#39;</code></p>
 
 <blockquote>
 <p>Example for getting additionnal info of the transaction:</p>
