@@ -417,7 +417,7 @@ Web3 library is a collection of modules which contain specific functionality for
 <pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">requestData</span> <span class="o">=</span> <span class="p">{</span> <span class="na">reason</span><span class="p">:</span> <span class="s1">'Order #030890 from Just Another Shop'</span><span class="p">,</span>
                     <span class="na">orderId</span><span class="p">:</span> <span class="s1">'030890'</span> <span class="p">}</span>
 
-<span class="kr">const</span> <span class="nx">signedRequest</span> <span class="o">=</span> <span class="nx">await</span> <span class="k">this</span><span class="p">.</span><span class="nx">rn</span><span class="p">.</span><span class="nx">createSignedRequest</span><span class="p">(</span>
+<span class="kr">const</span> <span class="nx">signedRequest</span> <span class="o">=</span> <span class="nx">await</span> <span class="nx">requestnetwork</span><span class="p">.</span><span class="nx">createSignedRequest</span><span class="p">(</span>
   <span class="nx">Types</span><span class="p">.</span><span class="nx">Role</span><span class="p">.</span><span class="nx">Payee</span><span class="p">,</span>
   <span class="nx">Types</span><span class="p">.</span><span class="nx">Currency</span><span class="p">.</span><span class="nx">ETH</span><span class="p">,</span>
   <span class="p">[</span>
@@ -555,7 +555,7 @@ Web3 library is a collection of modules which contain specific functionality for
 </code></pre><h3 id='a-adding-the-button-to-your-website'>a. Adding the button to your website</h3>
 <p><img src="images/button.png" alt="pay-with button" /></p>
 
-<p>See example code for styling a &quot;paywith ETH&quot; button.</p>
+<p>See example code for styling a &quot;pay with ETH&quot; button.</p>
 <h3 id='b-redirect-to-the-gateway'>b. Redirect to the gateway</h3>
 <p>In order to ease the process for integrating a pay-with-request button on your website, the request app provides a gateway for displaying the info of a signed request and allowing someone to pay it.</p>
 
@@ -581,7 +581,7 @@ Web3 library is a collection of modules which contain specific functionality for
 <tr>
 <td>signedRequest</td>
 <td>object</td>
-<td>signed request object (see paragraph above for format)</td>
+<td>signedRequestData pamareter from  the signedRequest object returned from requestnetwork.createSignedRequest method (see paragraph above for format).</td>
 </tr>
 <tr>
 <td>callbackUrl</td>

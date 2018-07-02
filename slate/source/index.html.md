@@ -140,7 +140,7 @@ networkId | number | network id you're using, **must match the network of the pr
 const requestData = { reason: 'Order #030890 from Just Another Shop',
                     orderId: '030890' }
 
-const signedRequest = await this.rn.createSignedRequest(
+const signedRequest = await requestnetwork.createSignedRequest(
   Types.Role.Payee,
   Types.Currency.ETH,
   [
@@ -223,7 +223,7 @@ We use the following format `data = { reason: String, orderId: String }`, as a p
   <span _ngcontent-c1="">&nbsp;ETH</span>
 </button>
 
-````
+```
 ```css
 pay-with-button { 
   height: 60px;
@@ -245,7 +245,7 @@ pay-with-button {
 
 ![pay-with button](button.png)
 
-See example code for styling a "paywith ETH" button.
+See example code for styling a "pay with ETH" button.
 
 ### b. Redirect to the gateway
 
@@ -266,7 +266,7 @@ where `qsBase64` is a base 64 encoded string of a JSON object containing the fol
 
 Parameter | Type | Description
 --------- | ---- | -----------
-signedRequest | object | signed request object (see paragraph above for format)
+signedRequest | object | signedRequestData pamareter from  the signedRequest object returned from requestnetwork.createSignedRequest method (see paragraph above for format).
 callbackUrl | string | url for the gateway to redirect after request has been paid
 networkId | string | id of the network on which you signed the request ([see step 1.](#1-create-a-request-for-payment-on-your-back-end))
 
